@@ -17,19 +17,6 @@
     <title>Speed Math Challenge</title>
 </head>
 
-<!--
-<div class="container">
-    <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="index.php" class="nav-link" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="register.php" class="nav-link">Sign up</a></li>
-            <li class="nav-item"><a href="login.php" class="nav-link">Log in</a></li>
-            <li class="nav-item"><a href="about.php" class="nav-link">Info</a></li>
-        </ul>
-    </header>
-</div>
--->
-
 <body>
 
 <section id="section-one" class="d-flex align-items-center justify-content-center">
