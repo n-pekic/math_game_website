@@ -33,8 +33,8 @@
                 Sign up
             </button>
 
-        <!-- Button to trigger log-in-modal -->
-            <button id="button-log-in" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#log-in-modal">
+        <!-- Button to trigger login-modal -->
+            <button id="button-login" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#login-modal">
                 Log in
             </button>
 
@@ -63,27 +63,27 @@
             </div>
             <div class="modal-body">
 
-                <form action="" method="POST" id="sign-up-form">
+                <form action="" method="POST" id="signup-form">
                     <div class="mb-3">
-                        <label for="username-register" class="form-label">User Name</label>
-                        <input type="text" class="form-control" id="username-register" name="username-register" placeholder="Enter a user name">
+                        <label for="username-signup" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username-signup" name="username-signup" placeholder="Enter a username">
                         <small></small>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="email-register" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email-register" name="email-register" placeholder="Enter valid email address">
-                        <small></small>
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="email-signup" class="form-label">Email</label>-->
+<!--                        <input type="email" class="form-control" id="email-signup" name="email-signup" placeholder="Enter valid email address">-->
+<!--                        <small></small>-->
+<!--                    </div>-->
 
                     <div class="mb-3">
-                        <label for="password-register" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password-register" name="password-register" placeholder="Enter a  password">
+                        <label for="password-signup" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password-signup" name="password-signup" placeholder="Enter a  password">
                         <small></small>
                     </div>
 
                     <div class="d-flex justify-content-center">
-                    <button type="submit" name="sb-register" value="sb" class="button-modal btn mx-2">Submit</button>
+                    <button type="submit" name="sb-signup" value="sb" class="button-modal btn mx-2">Submit</button>
                     <button type="reset" class="button-modal btn mx-2">Reset</button>
                     </div>
                 </form>
@@ -93,26 +93,32 @@
 </div>
 
 <!-- Log in modal -->
-<div class="modal fade" id="log-in-modal" tabindex="-1" aria-labelledby="log-in-modal-label" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="log-in-modal-label"">Log in</h5>
+                <h5 class="modal-title" id="login-modal-label"">Log in</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-                <form action="" method="POST" id="log-in-form">
+                <form action="" method="POST" id="login-form">
+
+<!--                    <div class="mb-3">-->
+<!--                        <label for="email-login" class="form-label">Email</label>-->
+<!--                        <input type="email" class="form-control" id="email-login" name="email-login" placeholder="Enter your email">-->
+<!--                        <small></small>-->
+<!--                    </div>-->
 
                     <div class="mb-3">
-                        <label for="email-login" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email-login" name="email-login" placeholder="Enter your email">
+                        <label for="username-login" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username-login" name="username-login" placeholder="Enter your username">
                         <small></small>
                     </div>
 
                     <div class="mb-3">
-                        <label for="login-password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="login-password" name="password-login" placeholder="Enter your password">
+                        <label for="password-login" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password-login" name="password-login" placeholder="Enter your password">
                         <small></small>
                     </div>
 
@@ -152,7 +158,7 @@
             <div class="modal-body">
                 <p>
                     Simple high score table goes here. limit options/scope of
-                    information to make people register and get more info.
+                    information to make people signup and get more info.
                 </p>
             </div>
         </div>
