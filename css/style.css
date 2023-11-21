@@ -8,14 +8,9 @@ body {
     font-family: 'AR One Sans', 'Varela Round', sans-serif;
 }
 
-
-#section-one, #section-two, #section-three {
+#section-one, #section-two, #section-three{
     min-height: 33vh;
     text-align: center;
-}
-
-#section-one {
-    margin-top: 30px;
 }
 
 #section-one h2 {
@@ -26,9 +21,9 @@ body {
 }
 
 #section-one img {
+    padding-top: 30px;
     margin: 30px;
     animation: moveAround 4s linear infinite;
-
 }
 
 .button-modal {
