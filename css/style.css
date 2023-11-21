@@ -3,23 +3,32 @@ body {
     width: 70%;
     max-width: 70vw;
     min-height: 100vh;
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,1) 13%, rgba(144,228,250,1) 55%, rgba(35,201,245,1) 100%, rgba(105,229,255,1) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 13%, rgba(144, 228, 250, 1) 55%, rgba(35, 201, 245, 1) 100%, rgba(105, 229, 255, 1) 100%);
     font-family: 'AR One Sans', 'Varela Round', sans-serif;
 }
+
 
 #section-one, #section-two, #section-three {
     min-height: 33vh;
     text-align: center;
 }
 
+#section-one {
+    margin-top: 30px;
+}
+
 #section-one h2 {
     font-weight: bolder;
     letter-spacing: -2px;
+    margin-top: 15px;
+
 }
 
 #section-one img {
     margin: 30px;
+    animation: moveAround 4s linear infinite;
+
 }
 
 .button-modal {
@@ -30,6 +39,7 @@ body {
     color: #000;
     font-weight: 700;
     max-width: 200px;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
 }
 
 .button-modal:hover {
@@ -46,3 +56,35 @@ body {
 .modal-content {
     border-radius: 20px;
 }
+
+.error {
+    color: #f00;
+    display: block;
+}
+
+small {
+    display: block;
+    min-height: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+/*logo image animation*/
+
+@keyframes moveAround {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-5px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(5px);
+    }
+}
+
+
+
+
