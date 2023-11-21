@@ -50,8 +50,7 @@
     </div>
 </section>
 
-<section id="section-three">
-</section>
+<section id="section-three"> </section>
 
 <!-- Sign up modal -->
 <div class="modal fade" id="sign-up-modal" tabindex="-1" aria-labelledby="sign-up-modal-label" aria-hidden="true" data-bs-backdrop="static">
@@ -59,7 +58,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="sign-up-modal-label">Sign up</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="close-modal-signup" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
@@ -83,8 +82,9 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
+                        <input type="hidden" name="action" value="signup">
                     <button type="submit" name="sb-signup" value="sb" class="button-modal btn mx-2">Submit</button>
-                    <button type="reset" class="button-modal btn mx-2">Reset</button>
+                    <button type="reset" id="reset-signup" class="button-modal btn mx-2">Reset</button>
                     </div>
                 </form>
             </div>
@@ -98,7 +98,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="login-modal-label"">Log in</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="close-modal-login" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
@@ -123,8 +123,9 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
+                        <input type="hidden" name="action" value="login">
                         <button type="submit" name="sb-login" value="sb" class="button-modal btn mx-2">Submit</button>
-                        <button type="reset" class="button-modal btn mx-2">Reset</button>
+                        <button type="reset" id="reset-login" class="button-modal btn mx-2">Reset</button>
                     </div>
                 </form>
             </div>
