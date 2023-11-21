@@ -1,0 +1,48 @@
+body {
+    margin: 0 auto;
+    width: 70%;
+    max-width: 70vw;
+    min-height: 100vh;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 13%, rgba(144,228,250,1) 55%, rgba(35,201,245,1) 100%, rgba(105,229,255,1) 100%);
+    font-family: 'AR One Sans', 'Varela Round', sans-serif;
+}
+
+#section-one, #section-two, #section-three {
+    min-height: 33vh;
+    text-align: center;
+}
+
+#section-one h2 {
+    font-weight: bolder;
+    letter-spacing: -2px;
+}
+
+#section-one img {
+    margin: 30px;
+}
+
+.button-modal {
+    border-radius: 30px;
+    border: 1px solid black;
+    /*background-color: #F0F7F4;*/
+    background-color: #ffffff;
+    color: #000;
+    font-weight: 700;
+    max-width: 200px;
+}
+
+.button-modal:hover {
+    background-color: #3f464c;
+    color: #fff;
+    /*background-color: #FE5D26;*/
+    /*background-color: #98f1d0;*/
+}
+
+.modal-title {
+    font-weight: bolder
+}
+
+.modal-content {
+    border-radius: 20px;
+}
