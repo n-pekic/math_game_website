@@ -97,7 +97,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="login-modal-label"">Log in</h5>
+                <h5 class="modal-title" id="login-modal-label">Log in</h5>
                 <button id="close-modal-login" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
