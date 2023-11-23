@@ -28,116 +28,33 @@
 
 <section id="section-two" class="d-flex align-items-center justify-content-center">
     <div class="button-container">
-        <!-- Button to trigger sign-up-modal -->
-            <button id="button-sign-up" type="button" class="button-modal btn my-2 w-100" data-bs-toggle="modal" data-bs-target="#sign-up-modal">
-                Sign up
-            </button>
-
-        <!-- Button to trigger login-modal -->
-            <button id="button-login" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#login-modal">
-                Log in
-            </button>
-
-        <!-- Button to trigger the info-modal -->
-            <button id="button-info" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#info-modal">
-                How to Play
-            </button>
 
         <!-- Button to trigger high-scores-modal -->
             <button id="button-high-scores" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#high-scores-modal">
                 High-scores
             </button>
+
+        <!-- Button to trigger the info-modal -->
+        <button id="button-info" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#info-modal">
+            How to Play
+        </button>
+
+        <!-- Button to trigger login-modal -->
+        <button id="button-login" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#login-modal">
+            Log in
+        </button>
     </div>
 </section>
 
-<section id="section-three"> </section>
+<section id="section-three">
+</section>
 
-<!-- Sign up modal -->
-<div class="modal fade" id="sign-up-modal" tabindex="-1" aria-labelledby="sign-up-modal-label" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="sign-up-modal-label">Sign up</h5>
-                <button id="close-modal-signup" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <form action="" method="POST" id="signup-form">
-                    <div class="mb-3">
-                        <label for="username-signup" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username-signup" name="username-signup" placeholder="Enter a username">
-                        <small></small>
-                    </div>
-
-<!--                    <div class="mb-3">-->
-<!--                        <label for="email-signup" class="form-label">Email</label>-->
-<!--                        <input type="email" class="form-control" id="email-signup" name="email-signup" placeholder="Enter valid email address">-->
-<!--                        <small></small>-->
-<!--                    </div>-->
-
-                    <div class="mb-3">
-                        <label for="password-signup" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password-signup" name="password-signup" placeholder="Enter a  password">
-                        <small></small>
-                    </div>
-
-                    <div class="d-flex justify-content-center">
-                        <input type="hidden" name="action" value="signup">
-                    <button type="submit" name="sb-signup" value="sb" class="button-modal btn mx-2">Submit</button>
-                    <button type="reset" id="reset-signup" class="button-modal btn mx-2">Reset</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Log in modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="login-modal-label">Log in</h5>
-                <button id="close-modal-login" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <form action="" method="POST" id="login-form">
-
-<!--                    <div class="mb-3">-->
-<!--                        <label for="email-login" class="form-label">Email</label>-->
-<!--                        <input type="email" class="form-control" id="email-login" name="email-login" placeholder="Enter your email">-->
-<!--                        <small></small>-->
-<!--                    </div>-->
-
-                    <div class="mb-3">
-                        <label for="username-login" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username-login" name="username-login" placeholder="Enter your username">
-                        <small></small>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="password-login" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password-login" name="password-login" placeholder="Enter your password">
-                        <small></small>
-                    </div>
-
-                    <div class="d-flex justify-content-center">
-                        <input type="hidden" name="action" value="login">
-                        <button type="submit" name="sb-login" value="sb" class="button-modal btn mx-2">Submit</button>
-                        <button type="reset" id="reset-login" class="button-modal btn mx-2">Reset</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Info modal -->
 <div class="modal fade" id="info-modal" tabindex="-1" aria-labelledby="info-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div id="info-modal-header" class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">How to Play</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -152,7 +69,7 @@
 <div class="modal fade" id="high-scores-modal" tabindex="-1" aria-labelledby="high-scores-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div id="highscore-modal-header" class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">High scores</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -165,6 +82,102 @@
         </div>
     </div>
 </div>
+
+<!-- Log in modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div id="login-modal-header" class="modal-header">
+                <h5 class="modal-title" id="login-modal-label">Log in</h5>
+                <button id="close-modal-login" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="login-modal-body" class="modal-body">
+
+                <form action="login.php" method="POST" id="login-form">
+
+                    <!--                    <div class="mb-3">-->
+                    <!--                        <label for="email-login" class="form-label">Email</label>-->
+                    <!--                        <input type="email" class="form-control" id="email-login" name="email-login" placeholder="Enter your email">-->
+                    <!--                        <small></small>-->
+                    <!--                    </div>-->
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
+                        <small></small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                        <small></small>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <input type="hidden" name="action" value="login">
+                        <input type="hidden" name="source" value="web">
+                        <button type="submit" name="sb-login" value="sb" class="button-modal btn mx-2">Submit</button>
+                        <button type="reset" id="reset-login" class="button-modal btn mx-2">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Button to trigger sign-up-modal -->
+<!--            <button id="button-sign-up" type="button" class="button-modal btn my-2 w-100" data-bs-toggle="modal" data-bs-target="#sign-up-modal">-->
+<!--                Sign up-->
+<!--            </button>-->
+
+<!-- Sign up modal -->
+<!--<div class="modal fade" id="sign-up-modal" tabindex="-1" aria-labelledby="sign-up-modal-label" aria-hidden="true" data-bs-backdrop="static">-->
+<!--    <div class="modal-dialog modal-dialog-centered">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="sign-up-modal-label">Sign up</h5>-->
+<!--                <button id="close-modal-signup" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!---->
+<!--                <form action="" method="POST" id="signup-form">-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="username-signup" class="form-label">Username</label>-->
+<!--                        <input type="text" class="form-control" id="username-signup" name="username-signup" placeholder="Enter a username">-->
+<!--                        <small></small>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="email-signup" class="form-label">Email</label>-->
+<!--                        <input type="email" class="form-control" id="email-signup" name="email-signup" placeholder="Enter valid email address">-->
+<!--                        <small></small>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="password-signup" class="form-label">Password</label>-->
+<!--                        <input type="password" class="form-control" id="password-signup" name="password-signup" placeholder="Enter a  password">-->
+<!--                        <small></small>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="d-flex justify-content-center">-->
+<!--                        <input type="hidden" name="action" value="signup">-->
+<!--                    <button type="submit" name="sb-signup" value="sb" class="button-modal btn mx-2">Submit</button>-->
+<!--                    <button type="reset" id="reset-signup" class="button-modal btn mx-2">Reset</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<script>
+    // Add this JavaScript code to prevent form resubmission on page refresh
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
 
 </body>
 </html>
