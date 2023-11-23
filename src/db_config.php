@@ -18,7 +18,14 @@ $pdoOptions = [
 
 $GLOBALS['pdo'] = connectDatabase($dsn, $pdoOptions);
 
-/**Function tries to connect to database using PDO.
+$messages = [
+    1 => "Please fill all form fields.",
+    2 => "No such username or wrong password."
+];
+
+
+/**
+ * Function tries to connect to database using PDO.
  * @param string $dsn
  * @param array $pdoOptions
  * @return PDO

@@ -93,7 +93,7 @@
             </div>
             <div id="login-modal-body" class="modal-body">
 
-                <form action="login.php" method="POST" id="login-form">
+                <form action="src/login.php" method="POST" id="login-form">
 
                     <!--                    <div class="mb-3">-->
                     <!--                        <label for="email-login" class="form-label">Email</label>-->
