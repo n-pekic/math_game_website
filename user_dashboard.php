@@ -27,4 +27,4 @@ if($login === true){
     }
 }
 
-echo '<a href="src/logout.php">Log out</a>';
+echo '<a href="logout.php">Log out</a>';
