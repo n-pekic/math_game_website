@@ -54,6 +54,7 @@ if($login_data['source'] === 'mobile') {
     if($user_data) {
         $_SESSION['login'] = true;
         $_SESSION['id_user'] = $user_data['id_user'];
+        $_SESSION['username'] = $user_data['username'];
         $_SESSION['role'] = $user_data['role'];
         redirection('user_dashboard.php');
     } else {

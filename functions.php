@@ -1,4 +1,5 @@
 <?php
+
 require_once 'db_config.php';
 
 /**
@@ -14,7 +15,7 @@ function redirection(string $url): void
 
 
 /**
- * Function tries to register new user and returns whether it was successful
+ * Function tries to register new user
  * @param array $register_data
  * @return bool
  */
@@ -33,13 +34,13 @@ function userRegister(array $register_data): bool
 
 
 /**
- * Function returns user id and role if match found in database, or returns false if no match was found
+ * Function returns user_id, username, role if match found in database, or returns false if no match found
  * @param array $login_data
  * @return array|bool
  */
 function userLogin(array $login_data): array|bool
 {
-    $sql = "SELECT id_user, role 
+    $sql = "SELECT id_user, role, username
             FROM users
             WHERE username = :username AND user_password = :password";
 
@@ -48,22 +49,13 @@ function userLogin(array $login_data): array|bool
     $stmt->bindValue(':password', $login_data['password'], PDO::PARAM_STR);
     $stmt->execute();
 
-    $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    return $user_data ?? false;
-}
-
-/**
- * Function returns simple or full high-score table data based on passed parameter
- * @param string $type
- * @return array
- */
-function getHighscores(string $type): array
-{
-    return 'highscore data array';
+    return $data ?? false;
 }
 
 
+// what gets passed and written via function still not determined.
 /**
  * Function writes highscore data for given user id
  * @param int $id_user
@@ -71,6 +63,26 @@ function getHighscores(string $type): array
  */
 function writeHighscore(int $id_user): bool
 {
-    $success = true;
-    return $success;
+    // pass an $array with all the necessary high-score data
+    // write to database, and return rowCount > 0;
+    return true;
 }
+
+// id_highscore id_user correct_answers incorect_answers avg_time game_type game_level date_time
+// maybe we can always grab full high-scores and just show more or less info on front-end (type not needed then)
+/**
+ * Function returns simple or full high-score table data based on passed parameter
+ * @param string $type
+ * @return array
+ */
+function getHighscores(): array
+{
+    // $sql = "SELECT * FROM highscores WHERE type = :type LIMIT :limit";   limit number of rows perhaps
+    $sql = "SELECT * FROM highscores";
+    $stmt = $GLOBALS['pdo']->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
