@@ -23,6 +23,15 @@ $messages = [
     2 => "No such username or wrong password."
 ];
 
+$actions = [
+    1 => 'register',
+    2 => 'login'
+];
+
+$source = [
+    1 => 'mobile',
+    2 => 'web'
+];
 
 /**
  * Function tries to connect to database using PDO.
@@ -32,7 +41,6 @@ $messages = [
  */
 function connectDatabase(string $dsn, array $pdoOptions): PDO
 {
-
     try {
         $pdo = new PDO($dsn, PARAMS['USER'], PARAMS['PASSWORD'], $pdoOptions);
     } catch (\PDOException $e) {
