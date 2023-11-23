@@ -20,7 +20,8 @@ $GLOBALS['pdo'] = connectDatabase($dsn, $pdoOptions);
 
 $messages = [
     1 => "Please fill all form fields.",
-    2 => "No such username or wrong password."
+    2 => "No such username or wrong password.",
+    3 => "You have been logged out."
 ];
 
 $actions = [
