@@ -41,17 +41,17 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['sour
 if($login_data['source'] === 'mobile') {
     //var_dump($user_data);
     // check if false value is a better return than the error message.
-    $user_data = userSignup($login_data);
+    $user_data = userLogin($login_data);
     echo json_encode($user_data !== false ? $user_data : "No such username or password");
 } elseif ($login_data['source'] === 'web') {
-    $user_data = userSignup($login_data);
+    $user_data = userLogin($login_data);
     var_dump($user_data);
 
     if($user_data) {
         $_SESSION['login'] = true;
         $_SESSION['id_user'] = $user_data['id_user'];
         $_SESSION['role'] = $user_data['role'];
-        redirection('user_dashboard.php');
+        redirection('./user_dashboard.php');
     } else {
         // take display message code from web_prog project login_register page
         // "no such username password.", logout.php will set error message
