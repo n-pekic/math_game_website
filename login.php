@@ -28,8 +28,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 // return user_id and role if successful or false
 
 session_start();
-
 require_once 'functions.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirection('index.php');
+    exit();
+}
 
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['source']) && isset($_POST['action'])) {
     $login_data['action'] = strip_tags(trim($_POST['action']));
@@ -51,13 +55,13 @@ if($login_data['source'] === 'mobile') {
         $_SESSION['login'] = true;
         $_SESSION['id_user'] = $user_data['id_user'];
         $_SESSION['role'] = $user_data['role'];
-        redirection('./user_dashboard.php');
+        redirection('user_dashboard.php');
     } else {
         // take display message code from web_prog project login_register page
         // "no such username password.", logout.php will set error message
         session_unset();
         session_destroy();
-        redirection('index.php?e=1');
+        redirection('index.php?m=2');
     }
 }
 
