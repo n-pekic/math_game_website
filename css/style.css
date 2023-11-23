@@ -8,28 +8,25 @@ body {
     font-family: 'AR One Sans', 'Varela Round', sans-serif;
 }
 
+h2 {
+    font-weight: bolder;
+    letter-spacing: -2px;
+    margin-top: 15px;
+}
+
+#section-one img {
+    padding-top: 30px;
+    animation: moveAround 4s linear infinite;
+}
+
 #section-one, #section-two, #section-three{
     min-height: 33vh;
     text-align: center;
 }
 
-#section-one h2 {
-    font-weight: bolder;
-    letter-spacing: -2px;
-    margin-top: 15px;
-
-}
-
-#section-one img {
-    padding-top: 30px;
-    margin: 30px;
-    animation: moveAround 4s linear infinite;
-}
-
 .button-modal {
     border-radius: 30px;
     border: 1px solid black;
-    /*background-color: #F0F7F4;*/
     background-color: #ffffff;
     color: #000;
     font-weight: 700;
@@ -40,8 +37,19 @@ body {
 .button-modal:hover {
     background-color: #3f464c;
     color: #fff;
-    /*background-color: #FE5D26;*/
-    /*background-color: #98f1d0;*/
+}
+
+#button-info:hover {
+    background-color: #CA87CF;
+    color: black;
+}
+#button-login:hover {
+    background-color: #E64040;
+    color: black;
+}
+#button-high-scores:hover {
+    background-color: #88a511;
+    color: black;
 }
 
 .modal-title {
@@ -64,7 +72,6 @@ small {
 }
 
 /*logo image animation*/
-
 @keyframes moveAround {
     0%, 100% {
         transform: translateY(0);
