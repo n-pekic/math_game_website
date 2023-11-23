@@ -11,36 +11,45 @@ const numsLetters = new RegExp(/^[A-Za-z0-9_-]*$/)
 
 function init() {
 
+    /*
     // signup form
     // const formSignup = document.getElementById('signup-form');
     // const resetSignup = document.getElementById('reset-signup');
     // const closeModalSignup = document.getElementById('close-modal-signup')
+     */
 
     // login form
     const formLogin = document.getElementById('login-form');
     const resetLogin = document.getElementById('reset-login');
     const closeModalLogin = document.getElementById('close-modal-login')
 
-    // reset error fields in signup/login form when reset or exit buttons are clicked
-    // resetSignup.addEventListener('click', function (e) {
-    //     resetErrorFields(formSignup);
-    // })
-    // closeModalSignup.addEventListener('click', function (e) {
-    //     resetErrorFields(formSignup);
-    // })
-    resetLogin.addEventListener('click', function (e) {
-        resetErrorFields(formLogin);
+    /*
+    //reset error fields in signup/login form when reset or exit buttons are clicked
+    resetSignup.addEventListener('click', function (e) {
+        resetErrorFields(formSignup);
     })
-    closeModalLogin.addEventListener('click', function (e) {
-        resetErrorFields(formLogin);
+    closeModalSignup.addEventListener('click', function (e) {
+        resetErrorFields(formSignup);
     })
+     */
 
-    // if(formSignup !== null) {
-    //     formSignup.addEventListener('submit', function (e) {
-    //         e.preventDefault()
-    //         if(validateFormSignup()) this.submit();
-    //     })
-    // }
+    if(resetLogin) {
+        resetLogin.addEventListener('click', function (e) {
+            resetErrorFields(formLogin);
+        })
+        closeModalLogin.addEventListener('click', function (e) {
+            resetErrorFields(formLogin);
+        })
+    }
+
+    /*
+    if(formSignup !== null) {
+        formSignup.addEventListener('submit', function (e) {
+            e.preventDefault()
+            if(validateFormSignup()) this.submit();
+        })
+    }
+     */
 
     if(formLogin !== null) {
         formLogin.addEventListener('submit', function (e) {
@@ -48,6 +57,55 @@ function init() {
             if (validateFormLogin()) this.submit();
         })
     }
+
+    let userTable = document.getElementById('user-table');
+    let highscoreTable = document.getElementById('highscore-table');
+
+    if(userTable) {
+        $(userTable).DataTable({
+            ajax: {
+                url: 'ajax/users.php',
+                type: 'POST',
+                dataSrc: "",
+            },
+            columns: [
+                {data: 'id_user', title: 'ID'},
+                {data: 'username', title: 'user name'},
+            ]
+        });
+    }
+
+    if(highscoreTable){
+        $(highscoreTable).DataTable({
+            ajax: {
+                url: 'ajax/highscores.php',
+                type: 'POST',
+                dataSrc: "",
+            },
+            columns: [
+                {data: 'id_highscore', title: 'ID'},
+                {data: 'id_user', title: 'ID user'},
+                {data: 'correct_answers', title: 'correct'},
+                {data: 'incorrect_answers', title: 'incorrect'},
+                {data: 'avg_time', title: 'avg_time'},
+                {data: 'game_type', title: 'game type'},
+                {data: 'game_level', title: 'game level'},
+                {data: 'date_time', title: 'date time'}
+            ]
+        });
+
+    }
+
+    /*
+    id_highscore
+id_user
+correct_answers
+incorrect_answers
+avg_time
+game_type
+game_level
+date_time
+     */
 
 
 }

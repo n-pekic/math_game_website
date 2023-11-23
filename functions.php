@@ -55,18 +55,32 @@ function userLogin(array $login_data): array|bool
 }
 
 
+/**
+ * Function info for all registered users
+ * @return array
+ */
+function getUsers(): array
+{
+    $sql = "SELECT * FROM users";
+    $stmt = $GLOBALS['pdo']->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 // what gets passed and written via function still not determined.
 /**
  * Function writes highscore data for given user id
  * @param int $id_user
  * @return bool
  */
-function writeHighscore(int $id_user): bool
+function addHighscore(int $id_user): bool
 {
     // pass an $array with all the necessary high-score data
     // write to database, and return rowCount > 0;
     return true;
 }
+
 
 // id_highscore id_user correct_answers incorect_answers avg_time game_type game_level date_time
 // maybe we can always grab full high-scores and just show more or less info on front-end (type not needed then)
@@ -77,12 +91,10 @@ function writeHighscore(int $id_user): bool
  */
 function getHighscores(): array
 {
-    // $sql = "SELECT * FROM highscores WHERE type = :type LIMIT :limit";   limit number of rows perhaps
     $sql = "SELECT * FROM highscores";
     $stmt = $GLOBALS['pdo']->prepare($sql);
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 }
 

@@ -9,5 +9,4 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $highscore_data = getHighscores();
-
-print_r($highscore_data);
+echo json_encode($highscore_data);

@@ -56,9 +56,9 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     </div>
 
     <!--Button to trigger sign-up-modal -->
-    <button id="button-sign-up" type="button" class="button-modal btn my-2 w-100" data-bs-toggle="modal" data-bs-target="#sign-up-modal">
-        Sign up
-    </button>
+<!--    <button id="button-sign-up" type="button" class="button-modal btn my-2 w-100" data-bs-toggle="modal" data-bs-target="#sign-up-modal">-->
+<!--        Sign up-->
+<!--    </button>-->
 </section>
 
 <section id="section-three">
