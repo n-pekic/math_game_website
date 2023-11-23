@@ -12,9 +12,9 @@ const numsLetters = new RegExp(/^[A-Za-z0-9_-]*$/)
 function init() {
 
     // signup form
-    const formSignup = document.getElementById('signup-form');
-    const resetSignup = document.getElementById('reset-signup');
-    const closeModalSignup = document.getElementById('close-modal-signup')
+    // const formSignup = document.getElementById('signup-form');
+    // const resetSignup = document.getElementById('reset-signup');
+    // const closeModalSignup = document.getElementById('close-modal-signup')
 
     // login form
     const formLogin = document.getElementById('login-form');
@@ -22,12 +22,12 @@ function init() {
     const closeModalLogin = document.getElementById('close-modal-login')
 
     // reset error fields in signup/login form when reset or exit buttons are clicked
-    resetSignup.addEventListener('click', function (e) {
-        resetErrorFields(formSignup);
-    })
-    closeModalSignup.addEventListener('click', function (e) {
-        resetErrorFields(formSignup);
-    })
+    // resetSignup.addEventListener('click', function (e) {
+    //     resetErrorFields(formSignup);
+    // })
+    // closeModalSignup.addEventListener('click', function (e) {
+    //     resetErrorFields(formSignup);
+    // })
     resetLogin.addEventListener('click', function (e) {
         resetErrorFields(formLogin);
     })
@@ -35,12 +35,13 @@ function init() {
         resetErrorFields(formLogin);
     })
 
-    if(formSignup !== null) {
-        formSignup.addEventListener('submit', function (e) {
-            e.preventDefault()
-            if(validateFormSignup()) this.submit();
-        })
-    }
+    // if(formSignup !== null) {
+    //     formSignup.addEventListener('submit', function (e) {
+    //         e.preventDefault()
+    //         if(validateFormSignup()) this.submit();
+    //     })
+    // }
+
     if(formLogin !== null) {
         formLogin.addEventListener('submit', function (e) {
             e.preventDefault()
@@ -51,6 +52,7 @@ function init() {
 
 }
 
+/*
 let validateFormSignup = () => {
 
     let isValid = true;
@@ -79,12 +81,13 @@ let validateFormSignup = () => {
 
     return isValid;
 }
+ */
 
 let validateFormLogin = () => {
 
     let isValid = true;
-    const usernameLogin = document.getElementById('username-login');
-    const passwordLogin = document.getElementById('password-login');
+    const usernameLogin = document.getElementById('username');
+    const passwordLogin = document.getElementById('password');
 
     if(isEmpty(usernameLogin.value.trim())) {
         showErrorMessage(usernameLogin, "Username cannot be empty.");
@@ -102,6 +105,8 @@ let validateFormLogin = () => {
     if(isEmpty(passwordLogin.value.trim())) {
         showErrorMessage(passwordLogin, "Enter your password.")
         isValid = false;
+    } else {
+        hideErrorMessage(passwordLogin);
     }
 
     return isValid;
@@ -136,35 +141,3 @@ const resetErrorFields = (form) => {
     }
 };
 
-
-/* try key input checks on form fields.
-<form action="" method="POST" id="signup-form">
-    <div class="mb-3">
-        <label for="username-signup" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username-signup" name="username-signup" placeholder="Enter a username">
-        <small id="username-error">&nbsp;</small>
-    </div>
-
-    <!-- ... other form fields ... -->
-</form>
-
-<script>
-const usernameField = document.getElementById('username-signup');
-const usernameError = document.getElementById('username-error');
-
-usernameField.addEventListener('input', function () {
-    const usernameValue = this.value.trim();
-
-    // Example condition: Check if username contains non-alphanumeric characters
-    if (/[^a-zA-Z0-9]/.test(usernameValue)) {
-        usernameError.innerText = 'Username must contain only alphanumeric characters.';
-        usernameError.classList.add('error');
-    } else {
-        usernameError.innerText = '';
-        usernameError.classList.remove('error');
-    }
-
-    // Add more conditions as needed
-});
-</script>
- */
