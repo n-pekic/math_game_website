@@ -58,11 +58,41 @@ function init() {
         })
     }
 
-    let userTable = document.getElementById('user-table');
-    let highscoreTable = document.getElementById('highscore-table');
 
-    if(userTable) {
-        $(userTable).DataTable({
+    // main page highscore table for guests.
+
+    let highscoreTableGuest = document.getElementById('highscore-table-guest');
+    if(highscoreTableGuest) {
+        $(highscoreTableGuest).DataTable({
+            ajax: {
+                url: 'ajax/highscores.php',
+                type: 'POST',
+                dataSrc: "",
+                data: {
+                    type: 'guest'
+                },
+            },
+            columns: [
+                {data: 'username', title: 'username'},
+                {data: 'correct_answers', title: 'correct'},
+                {data: 'incorrect_answers', title: 'incorrect'},
+                {data: 'avg_time', title: 'avg_time'},
+                {data: 'game_type', title: 'type'},
+                {data: 'game_level', title: 'level'},
+                {data: 'date_time', title: 'date'}
+            ],
+            paging: false,       // Disable pagination
+            searching: false,    // Disable search bar
+            info: false,       // Disable displaying "Showing x of y entries"
+            order: [[1, 'desc']],
+            scrollX: true  // Enable horizontal scrolling
+        });
+    }
+
+    // user-dashboard tables for admin
+    let userTableAdmin = document.getElementById('user-table-admin');
+    if(userTableAdmin) {
+        $(userTableAdmin).DataTable({
             ajax: {
                 url: 'ajax/users.php',
                 type: 'POST',
@@ -75,16 +105,21 @@ function init() {
         });
     }
 
-    if(highscoreTable){
-        $(highscoreTable).DataTable({
+    let highscoreTableAdmin = document.getElementById('highscore-table-admin');
+    if(highscoreTableAdmin){
+        $(highscoreTableAdmin).DataTable({
             ajax: {
                 url: 'ajax/highscores.php',
                 type: 'POST',
+                data: {
+                    type: 'guest'
+                },
                 dataSrc: "",
             },
             columns: [
                 {data: 'id_highscore', title: 'ID'},
                 {data: 'id_user', title: 'ID user'},
+                {data: 'username', title: 'username'},
                 {data: 'correct_answers', title: 'correct'},
                 {data: 'incorrect_answers', title: 'incorrect'},
                 {data: 'avg_time', title: 'avg_time'},
@@ -93,20 +128,57 @@ function init() {
                 {data: 'date_time', title: 'date time'}
             ]
         });
-
     }
 
-    /*
-    id_highscore
-id_user
-correct_answers
-incorrect_answers
-avg_time
-game_type
-game_level
-date_time
-     */
 
+    // user-dashboard tables for user
+    let highscoreTableUserPersonal = document.getElementById('highscore-table-user-personal');
+    //let idUser = document.getElementById('hidden-input').value;
+    if(highscoreTableUserPersonal && idUser){
+        $(highscoreTableUserPersonal).DataTable({
+            ajax: {
+                url: 'ajax/highscores.php',
+                type: 'POST',
+                data: {
+                    id_user: idUser
+                },
+                dataSrc: "",
+            },
+            columns: [
+
+                //{data: 'id_user', title: 'ID user'},
+                {data: 'username', title: 'username'},
+                {data: 'correct_answers', title: 'correct'},
+                {data: 'incorrect_answers', title: 'incorrect'},
+                {data: 'avg_time', title: 'avg_time'},
+                {data: 'game_type', title: 'game type'},
+                {data: 'game_level', title: 'game level'},
+                {data: 'date_time', title: 'date time'}
+            ]
+        });
+    }
+
+    let highscoreTableUser = document.getElementById
+    ('highscore-table-user');
+    if(highscoreTableUser){
+        $(highscoreTableUser).DataTable({
+            ajax: {
+                url: 'ajax/highscores.php',
+                type: 'POST',
+                dataSrc: "",
+            },
+            columns: [
+                //{data: 'id_user', title: 'ID user'},
+                //{data: 'correct_answers', title: 'correct'},
+                {data: 'username', title: 'username'},
+                {data: 'incorrect_answers', title: 'incorrect'},
+                {data: 'avg_time', title: 'avg_time'},
+                {data: 'game_type', title: 'game type'},
+                {data: 'game_level', title: 'game level'},
+                {data: 'date_time', title: 'date time'}
+            ]
+        });
+    }
 
 }
 

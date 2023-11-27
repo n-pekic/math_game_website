@@ -34,14 +34,14 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
 
     <link rel="stylesheet"  type="text/css" href="css/style.css">
     <script src="/js/scripts.js"></script>
-    <title>Speed Math Challenge</title>
+    <title>Speed Math Challenge v2</title>
 </head>
 <body>
 
 <section id="section-one" class="d-flex align-items-center justify-content-center">
     <div>
         <img src="img/speed_math_challenge_logo_crop.png" alt="speed_math_logo" width="150">
-        <h2>Speed Math Challenge</h2>
+        <h2>Speed Math Challenge v2</h2>
         <h3>Hello, <?= $_SESSION['username'] ?>!</h3>
     </div>
 </section>
@@ -53,30 +53,44 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
     switch ($role){
 
         case 'admin':
-            $highscore_data = getHighscores();
-            $user_data = getUsers();
-
             echo
             '
-            
-            <div class="data-table container mt-5">
-             <table id="user-table" class="table table-hover display" style="width:100%"></table>
-            </div> 
-            
-            <div class="data-table container mt-5">
-                <table id="highscore-table" class="table table-hover display" style="width:100%"></table>
+            <div class="table-container">
+                <div class="data-table container mt-5">
+                <h3>All Users</h3>
+                    <table id="user-table-admin" class="table table-hover display" style="width:100%"></table>
+                </div> 
+                
+                <div class="data-table container mt-5">
+                    <h3>All Highscores</h3>
+                    <table id="highscore-table-admin" class="table table-hover display" style="width:100%"></table>   
+                </div>
             </div>
-            
             ';
-
-            //initialize two datatables (user_data and highscore data)
             break;
 
         case 'user':
-            echo 'user panel';
-            $highscore_data = getHighscores();
-            //initialize dataTable for highscore_data
+            echo
+            '
+            <div class="table-container"> 
+                
+               <!--
+               <div class="data-table container mt-5">
+                <h3>Your High-scores</h3>
+                    <table id="highscore-table-user-personal" class="table table-hover display" style="width:100%"></table>
+                </div>
+                <input id="hidden-input" type="hidden" name="id_user" value="">
+                -->
+                
+                <div class="data-table container mt-5">
+                <h3>High-scores</h3>
+                    <table id="highscore-table-user" class="table table-hover display" style="width:100%"></table>
+                </div>
+ 
+            </div>
+            ';
             break;
+
         default:
             redirection('logout.php');
             break;

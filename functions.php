@@ -82,17 +82,68 @@ function addHighscore(int $id_user): bool
 }
 
 
-// id_highscore id_user correct_answers incorect_answers avg_time game_type game_level date_time
+// id_highscore id_user correct_answers incorrect_answers avg_time game_type game_level date_time
 // maybe we can always grab full high-scores and just show more or less info on front-end (type not needed then)
-/**
- * Function returns simple or full high-score table data based on passed parameter
- * @param string $type
- * @return array
- */
-function getHighscores(): array
+
+//Function returns simple or full high-score table data based on passed parameter
+//function getHighscores($id = null): array
+function getHighscores($type = null): array
 {
-    $sql = "SELECT * FROM highscores";
+
+    $sql = "SELECT h.*, u.username
+                FROM highscores h
+                INNER JOIN users u ON h.id_user = u.id_user";
+
+    if($type){
+        $sql = "SELECT h.*, u.username
+                FROM highscores h
+                INNER JOIN users u ON h.id_user = u.id_user
+                WHERE game_level = 'hard'
+                ORDER BY h.correct_answers DESC
+                LIMIT 5";
+    }
+
+
+//    if($id !== null){
+//        $sql .= " WHERE u.id_user = :id";
+//    }
+
     $stmt = $GLOBALS['pdo']->prepare($sql);
+
+//    if ($id !== null) {
+//        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+//    }
+
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getHighscoresGuest(): array
+{
+
+    // treba videti sta ce se tacno prikazivati gostima na sajtu.
+    // top 5 po tacnim odgovorima za tekuci ili prethodni mesec
+    $sql = "SELECT h.*, u.username
+            FROM highscores h
+            INNER JOIN users u ON h.id_user = u.id_user
+            WHERE (YEAR(h.date_time) = YEAR(CURRENT_DATE()) AND MONTH(h.date_time) = MONTH(CURRENT_DATE()))
+            OR (YEAR(h.date_time) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH) AND MONTH(h.date_time) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH))
+            ORDER BY correct_answers DESC
+            LIMIT 5;";
+
+    // top 5 all time po tacnim odgovorima
+    $sql2 = "SELECT h.*, u.username
+                FROM highscores h
+                INNER JOIN users u ON h.id_user = u.id_user
+                WHERE game_level = 'hard'
+                ORDER BY h.correct_answers DESC
+                LIMIT 5";
+
+
+
+    $stmt = $GLOBALS['pdo']->prepare($sql2);
+
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

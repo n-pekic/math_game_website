@@ -64,8 +64,6 @@ h2 {
     border-radius: 20px;
 }
 
-
-
 .error {
     color: #f00;
     display: block;
@@ -85,15 +83,11 @@ small {
     box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
 }
 
-/*
-potential accent color
-
-*/
-
-.dataTable tbody tr:hover {
-    /*background-color: #fdbeff;*/
-    /*background-color: #D9BCF2; */
-}
+/* potential accent colors*/
+/*.dataTable tbody tr:hover {*/
+/*    background-color: #fdbeff;*/
+/*    background-color: #D9BCF2;*/
+/*}*/
 
 
 /*logo image animation*/

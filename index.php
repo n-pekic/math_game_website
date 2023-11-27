@@ -15,7 +15,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -23,16 +22,22 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Varela+Round&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+
     <link rel="stylesheet"  type="text/css" href="css/style.css">
     <script src="/js/scripts.js"></script>
-    <title>Speed Math Challenge</title>
+    <title>Speed Math Challenge v2</title>
 </head>
 <body>
 
 <section id="section-one" class="d-flex align-items-center justify-content-center">
     <div>
         <img src="img/speed_math_challenge_logo_crop.png" alt="speed_math_logo" width="150">
-        <h2> Speed Math Challenge</h2>
+        <h2> Speed Math Challenge v2</h2>
     </div>
 </section>
 
@@ -82,17 +87,17 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
 <!-- High-scores modal -->
 <div class="modal fade" id="high-scores-modal" tabindex="-1" aria-labelledby="high-scores-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div id="highscore-modal-header" class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">High scores</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    Simple high score table goes here. limit options/scope of
-                    information to make people signup and get more info.
-                </p>
+
+                    <h3 style="text-align: center">TOP 5 High-scores</h3>
+                    <table id="highscore-table-guest" class="table table-hover display" style="width:100%"></table>
+
             </div>
         </div>
     </div>
