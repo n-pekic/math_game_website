@@ -83,6 +83,18 @@ small {
     box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
 }
 
+#alert-container {
+    /*background-color: #E64040;*/
+    background-color: #fff;
+    padding: 20px;
+    color: #000;
+    font-weight: bolder;
+    border-radius: 30px;
+    border: 1px solid black;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
+
+}
+
 /* potential accent colors*/
 /*.dataTable tbody tr:hover {*/
 /*    background-color: #fdbeff;*/

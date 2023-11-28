@@ -45,9 +45,9 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <div class="button-container">
 
         <!-- Button to trigger high-scores-modal -->
-            <button id="button-high-scores" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#high-scores-modal">
-                High-scores
-            </button>
+        <button id="button-high-scores" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#high-scores-modal">
+            High-scores
+        </button>
 
         <!-- Button to trigger the info-modal -->
         <button id="button-info" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#info-modal">
@@ -66,7 +66,23 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
 <!--    </button>-->
 </section>
 
-<section id="section-three">
+<section id="section-three" class="d-flex align-items-center justify-content-center">
+    <?php
+    $m = 0;
+    if (isset($_GET["m"]) and is_numeric($_GET['m'])) {
+        $m = (int)$_GET["m"];
+
+        if (array_key_exists($m, $messages)) {
+            echo '   
+                <div class="alert" id="alert-container" role="alert">
+                    <div class="text-center">
+                    ' . $messages[$m] . '
+                    </div>
+                </div>
+                ';
+        }
+    }
+    ?>
 </section>
 
 
@@ -144,7 +160,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
         </div>
     </div>
 </div>
-
 
 <!-- Sign up modal-->
 <div class="modal fade" id="sign-up-modal" tabindex="-1" aria-labelledby="sign-up-modal-label" aria-hidden="true" data-bs-backdrop="static">

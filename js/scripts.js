@@ -1,15 +1,22 @@
 window.addEventListener("DOMContentLoaded", init);
 
-
-// GET parameter redirection alerts, 5 second timeout. for php
-// const alertContainer = document.getElementById("alert-container");
-
 let timeout;
 const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})')
 const mediumPassword = new RegExp('((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))')
 const numsLetters = new RegExp(/^[A-Za-z0-9_-]*$/)
 
 function init() {
+
+    // GET parameter redirection alerts, 3.5 second timeout.
+    const alertContainer = document.getElementById("alert-container");
+
+    // GET parameter redirection alerts timeout
+    if (alertContainer) {
+        setTimeout(function () {
+            alertContainer.style.display = "none";
+        }, 3500);
+    }
+
 
     /*
     // signup form
@@ -111,9 +118,6 @@ function init() {
             ajax: {
                 url: 'ajax/highscores.php',
                 type: 'POST',
-                data: {
-                    type: 'guest'
-                },
                 dataSrc: "",
             },
             columns: [
