@@ -119,6 +119,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     </div>
 </div>
 
+<!-- nov komentar -->
 <!-- Log in modal -->
 <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
