@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once 'functions.php';
 
@@ -43,7 +42,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
 <section id="section-two" class="d-flex align-items-center justify-content-center">
     <div class="button-container">
-
         <!-- Button to trigger high-scores-modal -->
         <button id="button-high-scores" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#high-scores-modal">
             High-scores
@@ -59,11 +57,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
             Log in
         </button>
     </div>
-
-    <!--Button to trigger sign-up-modal -->
-<!--    <button id="button-sign-up" type="button" class="button-modal btn my-2 w-100" data-bs-toggle="modal" data-bs-target="#sign-up-modal">-->
-<!--        Sign up-->
-<!--    </button>-->
 </section>
 
 <section id="section-three" class="d-flex align-items-center justify-content-center">
@@ -85,7 +78,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     ?>
 </section>
 
-
 <!-- Info modal -->
 <div class="modal fade" id="info-modal" tabindex="-1" aria-labelledby="info-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -106,20 +98,17 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div id="highscore-modal-header" class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">High scores</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Top 5 High scores</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-                    <h3 style="text-align: center">TOP 5 High-scores</h3>
+<!--                    <h3 style="text-align: center">TOP 5 High-scores</h3>-->
                     <table id="highscore-table-guest" class="table table-hover display" style="width:100%"></table>
-
             </div>
         </div>
     </div>
 </div>
 
-<!-- nov komentar -->
 <!-- Log in modal -->
 <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
@@ -129,27 +118,17 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
                 <button id="close-modal-login" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div id="login-modal-body" class="modal-body">
-
                 <form action="login.php" method="POST" id="login-form">
-
-                    <!--                    <div class="mb-3">-->
-                    <!--                        <label for="email-login" class="form-label">Email</label>-->
-                    <!--                        <input type="email" class="form-control" id="email-login" name="email-login" placeholder="Enter your email">-->
-                    <!--                        <small></small>-->
-                    <!--                    </div>-->
-
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
                         <small></small>
                     </div>
-
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
                         <small></small>
                     </div>
-
                     <div class="d-flex justify-content-center">
                         <input type="hidden" name="action" value="login">
                         <input type="hidden" name="source" value="web">
@@ -162,49 +141,8 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     </div>
 </div>
 
-<!-- Sign up modal-->
-<div class="modal fade" id="sign-up-modal" tabindex="-1" aria-labelledby="sign-up-modal-label" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="sign-up-modal-label">Sign up</h5>
-                <button id="close-modal-signup" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <form action="register.php" method="POST" id="signup-form">
-                    <div class="mb-3">
-                        <label for="username-signup" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username-signup" name="username" placeholder="Enter a username">
-                        <small></small>
-                    </div>
-
-<!--                    <div class="mb-3">-->
-<!--                        <label for="email-signup" class="form-label">Email</label>-->
-<!--                        <input type="email" class="form-control" id="email-signup" name="email-signup" placeholder="Enter valid email address">-->
-<!--                        <small></small>-->
-<!--                    </div>-->
-
-                    <div class="mb-3">
-                        <label for="password-signup" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password-signup" name="password" placeholder="Enter a  password">
-                        <small></small>
-                    </div>
-
-                    <div class="d-flex justify-content-center">
-                        <input type="hidden" name="action" value="register">
-                        <input type="hidden" name="source" value="mobile">
-                    <button type="submit" name="sb-signup" value="sb" class="button-modal btn mx-2">Submit</button>
-                    <button type="reset" id="reset-signup" class="button-modal btn mx-2">Reset</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    // Add this JavaScript code to prevent form resubmission on page refresh
+    // Prevent form resubmission on page refresh
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }

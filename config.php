@@ -2,9 +2,12 @@
 
 const PARAMS = [
     "HOST" => 'localhost',
-    "USER" => 'root',
-    "PASSWORD" => '',
-    "DB" => 'agilni',
+//    "USER" => 'root',
+//    "PASSWORD" => '',
+//    "DB" => 'agilni',
+    "USER" => 'first',
+    "PASSWORD" => 'ZADcO14NsZMPzeU',
+    "DB" => 'first',
     "CHARSET" => 'utf8mb4'
 ];
 
@@ -33,21 +36,3 @@ $source = [
     1 => 'mobile',
     2 => 'web'
 ];
-
-/**
- * Function tries to connect to database using PDO.
- * @param string $dsn
- * @param array $pdoOptions
- * @return PDO
- */
-function connectDatabase(string $dsn, array $pdoOptions): PDO
-{
-    try {
-        $pdo = new PDO($dsn, PARAMS['USER'], PARAMS['PASSWORD'], $pdoOptions);
-    } catch (\PDOException $e) {
-        var_dump($e->getCode());
-        throw new \PDOException($e->getMessage());
-    }
-
-    return $pdo;
-}

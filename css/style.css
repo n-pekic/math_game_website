@@ -1,10 +1,10 @@
 body {
     margin: 0 auto;
-    width: 70%;
-    max-width: 70vw;
+    width: 100%;
+    max-width: 100vw;
     min-height: 100vh;
     background: rgb(255, 255, 255);
-    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 13%, rgba(144, 228, 250, 1) 55%, rgba(35, 201, 245, 1) 100%, rgba(105, 229, 255, 1) 100%);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(144, 228, 250, 1) 40%, rgba(35, 201, 245, 1) 80%, rgba(105, 229, 255, 1) 100%);
     font-family: 'AR One Sans', 'Varela Round', sans-serif;
 }
 
@@ -23,8 +23,6 @@ h2 {
     min-height: 33vh;
     text-align: center;
 }
-
-
 
 .button-modal {
     border-radius: 30px;
@@ -84,7 +82,6 @@ small {
 }
 
 #alert-container {
-    /*background-color: #E64040;*/
     background-color: #fff;
     padding: 20px;
     color: #000;

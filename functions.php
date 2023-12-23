@@ -1,6 +1,24 @@
 <?php
+require_once 'config.php';
 
-require_once 'db_config.php';
+/**
+ * Function tries to connect to database using PDO.
+ * @param string $dsn
+ * @param array $pdoOptions
+ * @return PDO
+ */
+function connectDatabase(string $dsn, array $pdoOptions): PDO
+{
+    try {
+        $pdo = new PDO($dsn, PARAMS['USER'], PARAMS['PASSWORD'], $pdoOptions);
+    } catch (\PDOException $e) {
+        var_dump($e->getCode());
+        throw new \PDOException($e->getMessage());
+    }
+
+    return $pdo;
+}
+
 
 /**
  * Function redirects with header() to supplied string url.
@@ -15,7 +33,7 @@ function redirection(string $url): void
 
 
 /**
- * Function tries to register new user
+ * Function registers new user
  * @param array $register_data
  * @return bool
  */
@@ -34,29 +52,39 @@ function userRegister(array $register_data): bool
 
 
 /**
- * Function returns user_id, username, role if match found in database, or returns false if no match found
+ * Function checks user login and returns relevant data
  * @param array $login_data
  * @return array|bool
  */
-function userLogin(array $login_data): array|bool
+function checkUserLogin(array $login_data): array|bool
 {
-    $sql = "SELECT id_user, role, username
+    $sql = "SELECT id_user, username, password, role
             FROM users
-            WHERE username = :username AND user_password = :password";
+            WHERE username = :username";
 
     $stmt = $GLOBALS['pdo']->prepare($sql);
     $stmt->bindValue(':username', $login_data['username'], PDO::PARAM_STR);
-    $stmt->bindValue(':password', $login_data['password'], PDO::PARAM_STR);
     $stmt->execute();
 
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $data = [];
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if($stmt->rowCount() >0){
+        $user_password = $result['password'];
+
+        if(password_verify($login_data['password'], $user_password)) {
+            $data['id_user'] = $result['id_user'];
+            $data['username'] = $result['username'];
+            $data['role'] = $result['role'];
+         }
+    }
 
     return $data ?? false;
 }
 
 
 /**
- * Function info for all registered users
+ * Function retrieves info for all registered users
  * @return array
  */
 function getUsers(): array
@@ -68,52 +96,38 @@ function getUsers(): array
 }
 
 
-// what gets passed and written via function still not determined.
 /**
- * Function writes highscore data for given user id
- * @param int $id_user
- * @return bool
+ * Function returns highscore data
+ * @param $type
+ * @return array
  */
-function addHighscore(int $id_user): bool
+function getHighscores(?string $arg = null): array
 {
-    // pass an $array with all the necessary high-score data
-    // write to database, and return rowCount > 0;
-    return true;
-}
-
-
-// id_highscore id_user correct_answers incorrect_answers avg_time game_type game_level date_time
-// maybe we can always grab full high-scores and just show more or less info on front-end (type not needed then)
-
-//Function returns simple or full high-score table data based on passed parameter
-//function getHighscores($id = null): array
-function getHighscores($type = null): array
-{
-
-    $sql = "SELECT h.*, u.username
-                FROM highscores h
-                INNER JOIN users u ON h.id_user = u.id_user";
-
-    if($type){
+    if ($arg === 'guest') {
         $sql = "SELECT h.*, u.username
                 FROM highscores h
                 INNER JOIN users u ON h.id_user = u.id_user
-                WHERE game_level = 'hard'
-                ORDER BY h.correct_answers DESC
+                ORDER BY points DESC
                 LIMIT 5";
+    } elseif ($arg) {
+        $sql = "SELECT h.*, u.username
+                FROM highscores h
+                INNER JOIN users u ON h.id_user = u.id_user
+                WHERE u.username = :user_name
+                ORDER BY h.points DESC, u.username";
+
+        $stmt = $GLOBALS['pdo']->prepare($sql);
+        $stmt->bindValue(':user_name', $arg, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $sql = "SELECT h.*, u.username
+                FROM highscores h
+                INNER JOIN users u ON h.id_user = u.id_user";
     }
 
-
-//    if($id !== null){
-//        $sql .= " WHERE u.id_user = :id";
-//    }
-
     $stmt = $GLOBALS['pdo']->prepare($sql);
-
-//    if ($id !== null) {
-//        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-//    }
-
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

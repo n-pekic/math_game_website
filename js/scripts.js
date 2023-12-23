@@ -17,46 +17,19 @@ function init() {
         }, 3500);
     }
 
-
-    /*
-    // signup form
-    // const formSignup = document.getElementById('signup-form');
-    // const resetSignup = document.getElementById('reset-signup');
-    // const closeModalSignup = document.getElementById('close-modal-signup')
-     */
-
-    // login form
+    // Login form
     const formLogin = document.getElementById('login-form');
     const resetLogin = document.getElementById('reset-login');
     const closeModalLogin = document.getElementById('close-modal-login')
 
-    /*
-    //reset error fields in signup/login form when reset or exit buttons are clicked
-    resetSignup.addEventListener('click', function (e) {
-        resetErrorFields(formSignup);
-    })
-    closeModalSignup.addEventListener('click', function (e) {
-        resetErrorFields(formSignup);
-    })
-     */
-
     if(resetLogin) {
         resetLogin.addEventListener('click', function (e) {
-            resetErrorFields(formLogin);
+            resetFields(formLogin);
         })
         closeModalLogin.addEventListener('click', function (e) {
-            resetErrorFields(formLogin);
+            resetFields(formLogin);
         })
     }
-
-    /*
-    if(formSignup !== null) {
-        formSignup.addEventListener('submit', function (e) {
-            e.preventDefault()
-            if(validateFormSignup()) this.submit();
-        })
-    }
-     */
 
     if(formLogin !== null) {
         formLogin.addEventListener('submit', function (e) {
@@ -65,10 +38,8 @@ function init() {
         })
     }
 
-
-    // main page highscore table for guests.
-
-    let highscoreTableGuest = document.getElementById('highscore-table-guest');
+    // index page -- highscore table
+    const highscoreTableGuest = document.getElementById('highscore-table-guest');
     if(highscoreTableGuest) {
         $(highscoreTableGuest).DataTable({
             ajax: {
@@ -76,14 +47,16 @@ function init() {
                 type: 'POST',
                 dataSrc: "",
                 data: {
-                    type: 'guest'
+                    user : 'guest'
                 },
             },
             columns: [
                 {data: 'username', title: 'username'},
+                {data: 'points', title: 'points'},
                 {data: 'correct_answers', title: 'correct'},
                 {data: 'incorrect_answers', title: 'incorrect'},
                 {data: 'avg_time', title: 'avg_time'},
+                {data: 'fastest_answer', title: 'fastest_answer'},
                 {data: 'game_type', title: 'type'},
                 {data: 'game_level', title: 'level'},
                 {data: 'date_time', title: 'date'}
@@ -91,77 +64,69 @@ function init() {
             paging: false,       // Disable pagination
             searching: false,    // Disable search bar
             info: false,       // Disable displaying "Showing x of y entries"
-            order: [[1, 'desc']],
-            scrollX: true  // Enable horizontal scrolling
+            //order: [[1, 'desc']],
+            ordering: false,
+            scrollX: true,  // Enable horizontal scrolling
+            sScrollXInner: '100%'
         });
     }
 
-    // user-dashboard tables for admin
+    $('#high-scores-modal').on('shown.bs.modal', function () {
+        const table = $('#highscore-table-guest').DataTable();
+        table.columns.adjust();
+    });
+
+    // admin tables -- user table
     let userTableAdmin = document.getElementById('user-table-admin');
     if(userTableAdmin) {
         $(userTableAdmin).DataTable({
             ajax: {
                 url: 'ajax/users.php',
                 type: 'POST',
-                dataSrc: "",
+                dataSrc: '',
             },
             columns: [
                 {data: 'id_user', title: 'ID'},
                 {data: 'username', title: 'user name'},
-            ]
+                {data: 'role', title: 'role'}
+            ],
+            scrollX: true,  // Enable horizontal scrolling
+            pagingType: 'simple'
         });
     }
 
+    // admin tables -- highscore table
     let highscoreTableAdmin = document.getElementById('highscore-table-admin');
     if(highscoreTableAdmin){
         $(highscoreTableAdmin).DataTable({
             ajax: {
                 url: 'ajax/highscores.php',
                 type: 'POST',
-                dataSrc: "",
-            },
-            columns: [
-                {data: 'id_highscore', title: 'ID'},
-                {data: 'id_user', title: 'ID user'},
-                {data: 'username', title: 'username'},
-                {data: 'correct_answers', title: 'correct'},
-                {data: 'incorrect_answers', title: 'incorrect'},
-                {data: 'avg_time', title: 'avg_time'},
-                {data: 'game_type', title: 'game type'},
-                {data: 'game_level', title: 'game level'},
-                {data: 'date_time', title: 'date time'}
-            ]
-        });
-    }
-
-
-    // user-dashboard tables for user
-    let highscoreTableUserPersonal = document.getElementById('highscore-table-user-personal');
-    //let idUser = document.getElementById('hidden-input').value;
-    if(highscoreTableUserPersonal && idUser){
-        $(highscoreTableUserPersonal).DataTable({
-            ajax: {
-                url: 'ajax/highscores.php',
-                type: 'POST',
+                dataSrc: '',
                 data: {
-                    id_user: idUser
+                    user : 'user'
                 },
-                dataSrc: "",
             },
             columns: [
-
+                //{data: 'id_highscore', title: 'ID'},
                 //{data: 'id_user', title: 'ID user'},
                 {data: 'username', title: 'username'},
-                {data: 'correct_answers', title: 'correct'},
-                {data: 'incorrect_answers', title: 'incorrect'},
-                {data: 'avg_time', title: 'avg_time'},
+                {data: 'points', title: 'points'},
                 {data: 'game_type', title: 'game type'},
                 {data: 'game_level', title: 'game level'},
+                {data: 'correct_answers', title: 'correct'},
+                {data: 'incorrect_answers', title: 'incorrect'},
+                {data: 'avg_time', title: 'avg time'},
+                {data: 'fastest_answer', title: 'fastest answer'},
                 {data: 'date_time', title: 'date time'}
-            ]
+            ],
+            order: [[8, 'desc']],
+            scrollX: true,  // Enable horizontal scrolling
+            pagingType: 'simple'
         });
     }
 
+    // user tables - highscore table
     let highscoreTableUser = document.getElementById
     ('highscore-table-user');
     if(highscoreTableUser){
@@ -169,53 +134,27 @@ function init() {
             ajax: {
                 url: 'ajax/highscores.php',
                 type: 'POST',
-                dataSrc: "",
+                dataSrc: '',
             },
             columns: [
                 //{data: 'id_user', title: 'ID user'},
-                //{data: 'correct_answers', title: 'correct'},
                 {data: 'username', title: 'username'},
-                {data: 'incorrect_answers', title: 'incorrect'},
-                {data: 'avg_time', title: 'avg_time'},
+                {data: 'points', title: 'points'},
                 {data: 'game_type', title: 'game type'},
                 {data: 'game_level', title: 'game level'},
+                {data: 'correct_answers', title: 'correct'},
+                {data: 'incorrect_answers', title: 'incorrect'},
+                {data: 'avg_time', title: 'avg time'},
+                {data: 'fastest_answer', title: 'fastest answer'},
                 {data: 'date_time', title: 'date time'}
-            ]
+            ],
+            order: [[8, 'desc']],
+            scrollX: true,  // Enable horizontal scrolling
+            pagingType: 'simple'
         });
     }
 
 }
-
-/*
-let validateFormSignup = () => {
-
-    let isValid = true;
-    const usernameSignup = document.getElementById('username-signup');
-    const passwordSignup = document.getElementById('password-signup');
-
-    if(isEmpty(usernameSignup.value.trim())) {
-        showErrorMessage(usernameSignup, "Username cannot be empty.")
-        isValid = false;
-    } else if (usernameSignup.value.trim().length > 12) {
-        showErrorMessage(usernameSignup, "Max length 12 characters.");
-        isValid = false;
-    } else if (!isOnlyNumsLetters(usernameSignup.value.trim())) {
-        showErrorMessage(usernameSignup, "Only A-Z, a-z, 0-9, -, and _ allowed.");
-        isValid = false;
-    } else {
-        hideErrorMessage(usernameSignup);
-    }
-
-    if(isEmpty(passwordSignup.value.trim()) || passwordSignup.value.trim().length < 8) {
-        showErrorMessage(passwordSignup, "Password empty or less than 8 characters.");
-        isValid = false;
-    } else {
-        hideErrorMessage(passwordSignup);
-    }
-
-    return isValid;
-}
- */
 
 let validateFormLogin = () => {
 
@@ -265,13 +204,21 @@ const hideErrorMessage = (field) => {
     error.innerText = '';
 }
 
-const resetErrorFields = (form) => {
+const resetFields = (form) => {
     let errorFields = form.querySelectorAll('small');
+    let inputFields = form.querySelectorAll('input');
+
     if (errorFields) {
         errorFields.forEach((element) => {
             element.innerText = '';
             element.classList.remove('error');
         });
+    }
+
+    if(inputFields) {
+        inputFields.forEach((input) => {
+            input.value = '';
+        })
     }
 };
 

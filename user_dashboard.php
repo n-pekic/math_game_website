@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once 'functions.php';
 
@@ -49,22 +48,21 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
 <section id="section-two" class="d-flex align-items-center justify-content-center">
 
     <?php
-
     switch ($role){
 
         case 'admin':
             echo
             '
-            <div class="table-container">
-                <div class="data-table container mt-5">
-                <h3>All Users</h3>
-                    <table id="user-table-admin" class="table table-hover display" style="width:100%"></table>
-                </div> 
-                
+            <div class="container">
                 <div class="data-table container mt-5">
                     <h3>All Highscores</h3>
                     <table id="highscore-table-admin" class="table table-hover display" style="width:100%"></table>   
                 </div>
+                
+                <div class="data-table container mt-5">
+                    <h3>All Users</h3>
+                    <table id="user-table-admin" class="table table-hover display" style="width:100%"></table>
+                </div> 
             </div>
             ';
             break;
@@ -72,21 +70,11 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
         case 'user':
             echo
             '
-            <div class="table-container"> 
-                
-               <!--
-               <div class="data-table container mt-5">
-                <h3>Your High-scores</h3>
-                    <table id="highscore-table-user-personal" class="table table-hover display" style="width:100%"></table>
-                </div>
-                <input id="hidden-input" type="hidden" name="id_user" value="">
-                -->
-                
+            <div class="container"> 
                 <div class="data-table container mt-5">
                 <h3>High-scores</h3>
                     <table id="highscore-table-user" class="table table-hover display" style="width:100%"></table>
                 </div>
- 
             </div>
             ';
             break;
@@ -95,10 +83,7 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
             redirection('logout.php');
             break;
     }
-
     ?>
-
-
 </section>
 
 <section id="section-three" class="d-flex align-items-center justify-content-center">
@@ -128,7 +113,6 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
 </div>
 
 <script>
-    // Add this JavaScript code to prevent form resubmission on page refresh
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
