@@ -80,14 +80,53 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
 <!-- Info modal -->
 <div class="modal fade" id="info-modal" tabindex="-1" aria-labelledby="info-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div id="info-modal-header" class="modal-header">
-                <h5 class="modal-title" id="info-modal-label">How to Play</h5>
+            <div id="info-modal-header" class="modal-header text-center">
+                <h5 class="modal-title w-100" id="info-modal-label">How to Play</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>How to play the game goes here</p>
+                <p><b>Izbor Operacija</b>: Igrač bira vrstu matematičkih operacija, kao što su zbrajanje i oduzimanje.</p>
+
+                <p><b>Izbor Broja Pitanja</b>: Igrač određuje broj pitanja koje želi rešiti tokom igre.</p>
+
+                <p><b>Brzo Rešavanje</b>: Cilj je brzo i tačno rešavati matematičke izračune kako bi se postigao što bolji rezultat.</p>
+
+                <p><b>Odbrojavanje Vremena</b>: Igra može uključivati element vremena, gde igrač ima određeno vreme za rešavanje svakog pitanja.</p>
+
+                <p><b>Bodovanje</b>: Igrač osvaja bodove na osnovu brzine i tačnosti rešavanja pitanja.</p>
+
+                <p><b>Izbor Operacija</b>: Igrač bira vrstu matematičkih operacija, kao što su zbrajanje i oduzimanje.</p>
+
+                <p><b>Izbor Broja Pitanja</b>: Igrač određuje broj pitanja koje želi rešiti tokom igre.</p>
+
+                <p><b>Brzo Rešavanje</b>: Cilj je brzo i tačno rešavati matematičke izračune kako bi se postigao što bolji rezultat.</p>
+
+                <p><b>Odbrojavanje Vremena</b>: Igra može uključivati element vremena, gde igrač ima određeno vreme za rešavanje svakog pitanja.</p>
+
+                <p><b>Bodovanje</b>: Igrač osvaja bodove na osnovu brzine i tačnosti rešavanja pitanja.</p>
+
+                <p><b>Izbor Operacija</b>: Igrač bira vrstu matematičkih operacija, kao što su zbrajanje i oduzimanje.</p>
+
+                <p><b>Izbor Broja Pitanja</b>: Igrač određuje broj pitanja koje želi rešiti tokom igre.</p>
+
+                <p><b>Brzo Rešavanje</b>: Cilj je brzo i tačno rešavati matematičke izračune kako bi se postigao što bolji rezultat.</p>
+
+                <p><b>Odbrojavanje Vremena</b>: Igra može uključivati element vremena, gde igrač ima određeno vreme za rešavanje svakog pitanja.</p>
+
+                <p><b>Bodovanje</b>: Igrač osvaja bodove na osnovu brzine i tačnosti rešavanja pitanja.</p>
+
+                <p><b>Izbor Operacija</b>: Igrač bira vrstu matematičkih operacija, kao što su zbrajanje i oduzimanje.</p>
+
+                <p><b>Izbor Broja Pitanja</b>: Igrač određuje broj pitanja koje želi rešiti tokom igre.</p>
+
+                <p><b>Brzo Rešavanje</b>: Cilj je brzo i tačno rešavati matematičke izračune kako bi se postigao što bolji rezultat.</p>
+
+                <p><b>Odbrojavanje Vremena</b>: Igra može uključivati element vremena, gde igrač ima određeno vreme za rešavanje svakog pitanja.</p>
+
+                <p><b>Bodovanje</b>: Igrač osvaja bodove na osnovu brzine i tačnosti rešavanja pitanja.</p>
+
             </div>
         </div>
     </div>
@@ -97,13 +136,15 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
 <div class="modal fade" id="high-scores-modal" tabindex="-1" aria-labelledby="high-scores-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
-            <div id="highscore-modal-header" class="modal-header">
-                <h5 class="modal-title" id="high-scores-modal-label">Top 5 High scores</h5>
+            <div id="highscore-modal-header" class="modal-header text-center">
+                <h5 class="modal-title w-100" id="high-scores-modal-label">Top 5 High scores</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 <!--                    <h3 style="text-align: center">TOP 5 High-scores</h3>-->
-                    <table id="highscore-table-guest" class="table table-hover display" style="width:100%"></table>
+                    <table id="highscore-table-guest" class="table table-hover display" style="width:100%">
+                        <caption style="caption-side: bottom; text-align: center">Log in for detailed view.</caption>
+                    </table>
             </div>
         </div>
     </div>
@@ -113,8 +154,8 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
 <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="login-modal-header text-center" class="modal-header">
-                <h5 class="modal-title" id="login-modal-label">Log in</h5>
+            <div id="login-modal-header" class="modal-header text-center">
+                <h5 class="modal-title w-100" id="login-modal-label">Log in</h5>
                 <button id="close-modal-login" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div id="login-modal-body" class="modal-body">

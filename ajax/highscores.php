@@ -7,11 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-if(isset($_POST['user']) && $_POST['user'] === 'guest') {
-    $highscore_data = getHighscores('guest');
-    echo json_encode($highscore_data);
-} else {
-    $highscore_data = getHighscores();
+if(!empty($_POST['user']) && in_array($_POST['user'], $users)) {
+    $user = $_POST['user'];
+    $highscore_data = getHighscores($user);
     echo json_encode($highscore_data);
 }
+
 

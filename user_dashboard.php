@@ -8,6 +8,7 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
     $id_user = $_SESSION['id_user'];
     $login = $_SESSION['login'];
     $role = $_SESSION['role'];
+    $username = $_SESSION['username'];
 }
 
 ?>
@@ -44,7 +45,7 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
     <div>
         <img src="img/speed_math_challenge_logo_crop.png" alt="speed_math_logo" width="150">
         <h2>Speed Math Challenge V2</h2>
-        <h3>Hello, <?= $_SESSION['username'] ?>!</h3>
+        <h3>Hello, <?= $username ?>!</h3>
     </div>
 </section>
 
@@ -60,13 +61,13 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
                 <div class="row">
                     <div class="col">
                         <div class="data-table container mt-5">
-                            <h3>All Highscores</h3>
+                            <h3>High-scores</h3>
                             <table id="highscore-table-admin" class="table table-hover display" style="width:100%"></table>   
                         </div>
                     </div>
                     <div class="col">
                         <div class="data-table container mt-5">
-                            <h3>All Users</h3>
+                            <h3>Users</h3>
                             <table id="user-table-admin" class="table table-hover display" style="width:100%"></table>
                         </div> 
                     </div>
@@ -109,9 +110,28 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
             echo
             '
             <div class="container"> 
-                <div class="data-table container mt-5">
-                <h3>High-scores</h3>
-                    <table id="highscore-table-user" class="table table-hover display" style="width:100%"></table>
+                <div class="row">
+                    <div class="col">
+                        <div class="data-table container mt-5">
+                            <h3>High-scores</h3>
+                            <table id="highscore-table-user" class="table table-hover display" style="width:100%"></table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="data-table container mt-5">
+                            <h3>Accuracy, games played by level</h3>
+                            <canvas id="user-stats-game-level"></canvas>       
+                        </div>
+                    </div>
+                     <div class="col-lg-6">
+                        <div class="data-table container mt-5">
+                            <h3>Accuracy, games played by type</h3>
+                            <canvas id="user-stats-game-type"></canvas>       
+                        </div>
+                    </div>
                 </div>
             </div>
             ';
@@ -139,8 +159,8 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
 <div class="modal fade" id="info-modal" tabindex="-1" aria-labelledby="info-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="info-modal-header" class="modal-header">
-                <h5 class="modal-title" id="info-modal-label-panel">How to Play</h5>
+            <div id="info-modal-header" class="modal-header text-center">
+                <h5 class="modal-title w-100" id="info-modal-label-panel">How to Play</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -156,144 +176,245 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
     }
 </script>
 
+<!-- Admin chart js-->
 <script>
-
     const diffLevel = document.getElementById('num-diff-level');
-    $.ajax({
-        url: 'ajax/game_difficulty_stats.php',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            new Chart(diffLevel, {
-                type: 'bar',
-                data: {
-                    labels: data.map(entry => entry.game_level),
-                    datasets: [{
-                        label: 'Total games played',
-                        data: data.map(entry => entry.games_played),
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                }
-            });
-        },
-        error: function(error) {
-            console.error('Error fetching data:', error);
-        }
-    });
+    if(diffLevel) {
+        $.ajax({
+            url: 'ajax/game_difficulty_stats.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                new Chart(diffLevel, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(entry => entry.game_level),
+                        datasets: [{
+                            label: 'Total games played',
+                            data: data.map(entry => entry.games_played),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {}
+                });
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
 
     const gameType = document.getElementById('num-type');
-    $.ajax({
-        url: 'ajax/game_type_stats.php',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            new Chart(gameType, {
-                type: 'bar',
-                data: {
-                    labels: data.map(entry => entry.game_type),
-                    datasets: [{
-                        label: 'Total games played',
-                        data: data.map(entry => entry.games_played),
-                        borderWidth: 1,
-                        backgroundColor: [
-                            'rgb(149,227,149, 0.7)',
-                            'rgb(149,227,149, 0.7)',
-                            'rgb(149,227,149, 0.7)',
-                            'rgb(149,227,149, 0.7)'
-                            // 'rgb(54,162,235, 0.7)',
-                            // 'rgb(255,205,86, 0.7)',
-                            // 'rgb(255,99,132, 0.7)'
-                        ]
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            ticks: {
-                                precision: 0
+    if(gameType) {
+        $.ajax({
+            url: 'ajax/game_type_stats.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                new Chart(gameType, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(entry => entry.game_type),
+                        datasets: [{
+                            label: 'Total games played',
+                            data: data.map(entry => entry.games_played),
+                            borderWidth: 1,
+                            backgroundColor: [
+                                'rgb(149,227,149, 0.7)',
+                                'rgb(149,227,149, 0.7)',
+                                'rgb(149,227,149, 0.7)',
+                                'rgb(149,227,149, 0.7)'
+                                // 'rgb(54,162,235, 0.7)',
+                                // 'rgb(255,205,86, 0.7)',
+                                // 'rgb(255,99,132, 0.7)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                ticks: {
+                                    precision: 0
+                                }
                             }
                         }
                     }
-                }
-            });
-        },
-        error: function(error) {
-            console.error('Error fetching data:', error);
-        }
-    });
+                });
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
 
     const topPlayersGames = document.getElementById('top-players-games');
-    $.ajax({
-        url: 'ajax/top_player_stats.php',
-        method: 'GET',
-        dataType: 'json',
-        data: {
-            sort_by: 'total_games'
-        },
-        success: function(data) {
-            new Chart(topPlayersGames, {
-                type: 'doughnut',
-                data: {
-                    labels: data.map(entry => entry.username),
-                    datasets: [{
-                        label: 'Total games played',
-                        data: data.map(entry => entry.games_played),
-                        borderWidth: 1
-                        // backgroundColor: [
-                        //     'rgb(149,227,149, 0.7)',
-                        //     'rgb(54,162,235, 0.7)',
-                        //     'rgb(255,205,86, 0.7)',
-                        //     'rgb(255,99,132, 0.7)'
-                        // ]
-                    }]
-                },
-                options: {
-                }
-            });
-        },
-        error: function(error) {
-            console.error('Error fetching data:', error);
-        }
-    });
+    if(topPlayersGames) {
+        $.ajax({
+            url: 'ajax/top_player_stats.php',
+            method: 'GET',
+            dataType: 'json',
+            data: {
+                sort_by: 'total_games'
+            },
+            success: function (data) {
+                new Chart(topPlayersGames, {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.map(entry => entry.username),
+                        datasets: [{
+                            label: 'Total games played',
+                            data: data.map(entry => entry.games_played),
+                            borderWidth: 1
+                            // backgroundColor: [
+                            //     'rgb(149,227,149, 0.7)',
+                            //     'rgb(54,162,235, 0.7)',
+                            //     'rgb(255,205,86, 0.7)',
+                            //     'rgb(255,99,132, 0.7)'
+                            // ]
+                        }]
+                    },
+                    options: {}
+                });
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
 
     const topPlayersPoints = document.getElementById('top-players-points');
-    $.ajax({
-        url: 'ajax/top_player_stats.php',
-        method: 'GET',
-        dataType: 'json',
-        data: {
-            sort_by: 'total_points'
-        },
-        success: function(data) {
-            new Chart(topPlayersPoints, {
-                type: 'doughnut',
-                data: {
-                    labels: data.map(entry => entry.username),
-                    datasets: [{
-                        label: 'Total points won',
-                        data: data.map(entry => entry.points),
-                        borderWidth: 1,
-                        backgroundColor: [
-                            'rgba(95,190,95,0.7)',
-                            'rgba(238,179,54,0.7)'
-                        ]
-                    }]
-                },
-                options: {
-                }
-            });
-        },
-        error: function(error) {
-            console.error('Error fetching data:', error);
-        }
-    });
-
-
-
+    if(topPlayersPoints) {
+        $.ajax({
+            url: 'ajax/top_player_stats.php',
+            method: 'GET',
+            dataType: 'json',
+            data: {
+                sort_by: 'total_points'
+            },
+            success: function (data) {
+                new Chart(topPlayersPoints, {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.map(entry => entry.username),
+                        datasets: [{
+                            label: 'Total points won',
+                            data: data.map(entry => entry.points),
+                            borderWidth: 1,
+                            backgroundColor: [
+                                'rgba(95,190,95,0.7)',
+                                'rgba(238,179,54,0.7)'
+                            ]
+                        }]
+                    },
+                    options: {}
+                });
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
 </script>
 
+<!-- User chart js-->
+<script>
+
+    const userStatsGameLevel = document.getElementById('user-stats-game-level');
+    if(userStatsGameLevel) {
+        $.ajax({
+            url: 'ajax/user_game_stats.php',
+            method: 'GET',
+            dataType: 'json',
+            data: {
+                filter: 'game_level',
+                id: '<?= $id_user ?>'
+            },
+            success: function (data) {
+                new Chart(userStatsGameLevel, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(entry => entry.game_level),
+                        datasets: [{
+                            label: 'Games played',
+                            data: data.map(entry => entry.games_played),
+                            borderWidth: 1,
+                            backgroundColor: 'rgba(73,217,251,0.6)'
+                        },
+                            {
+                                label: 'Accuracy (%)',
+                                //data: data.map(entry => entry.ans_accuracy),
+                                data: data.map(entry => parseFloat(entry.ans_accuracy)), // Convert to float
+                                borderWidth: 1,
+                                backgroundColor: 'rgba(137,238,174,0.6)'
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                ticks: {
+                                    precision: 0
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+
+
+    const userStatsGameType = document.getElementById('user-stats-game-type');
+    if(userStatsGameType) {
+        $.ajax({
+            url: 'ajax/user_game_stats.php',
+            method: 'GET',
+            dataType: 'json',
+            data: {
+                filter: 'game_type',
+                id: '<?= $id_user ?>'
+            },
+            success: function (data) {
+                console.log(data);
+                new Chart(userStatsGameType, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(entry => entry.game_type),
+                        datasets: [{
+                            label: 'Games played',
+                            data: data.map(entry => entry.games_played),
+                            borderWidth: 1,
+                            backgroundColor: 'rgba(73,217,251,0.6)'
+                        },
+                            {
+                                label: 'Accuracy (%)',
+                                //data: data.map(entry => entry.ans_accuracy),
+                                data: data.map(entry => parseFloat(entry.ans_accuracy)), // Convert to float
+                                borderWidth: 1,
+                                backgroundColor: 'rgba(137,238,174,0.6)'
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                ticks: {
+                                    precision: 0
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

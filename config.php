@@ -36,3 +36,5 @@ $source = [
     1 => 'mobile',
     2 => 'web'
 ];
+
+$users = ['guest', 'user', 'admin'];

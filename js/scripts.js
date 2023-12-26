@@ -53,25 +53,25 @@ function init() {
             columns: [
                 {data: 'username', title: 'username'},
                 {data: 'points', title: 'points'},
-                {data: 'correct_answers', title: 'correct'},
-                {data: 'incorrect_answers', title: 'incorrect'},
-                {data: 'avg_time', title: 'avg_time'},
-                {data: 'fastest_answer', title: 'fastest_answer'},
+                // {data: 'correct_answers', title: 'correct'},
+                // {data: 'incorrect_answers', title: 'incorrect'},
+                // {data: 'avg_time', title: 'avg_time'},
+                // {data: 'fastest_answer', title: 'fastest_answer'},
                 {data: 'game_type', title: 'type'},
                 {data: 'game_level', title: 'level'},
-                {data: 'accuracy', title: 'accuracy'},
+                //{data: 'accuracy', title: 'accuracy'},
                 {data: 'date_time', title: 'date'}
             ],
             paging: false,       // Disable pagination
             searching: false,    // Disable search bar
             info: false,       // Disable displaying "Showing x of y entries"
-            //order: [[1, 'desc']],
+            //order: [1, 'desc'],
             ordering: false,
             scrollX: true,  // Enable horizontal scrolling
             sScrollXInner: '100%',
             columnDefs: [
                 // Center align both header and body content of columns [...]
-                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ] }
+                { className: "dt-center", targets: [ 0, 1, 2, 3, 4 ] }
             ]
         });
     }
@@ -89,16 +89,19 @@ function init() {
                 url: 'ajax/users.php',
                 type: 'POST',
                 dataSrc: '',
+                data: {
+                    user: 'admin'
+                },
             },
             columns: [
                 {data: 'id_user', title: 'id'},
                 {data: 'role', title: 'role'},
                 {data: 'username', title: 'username'},
+                {data: 'total points', title: 'total points'},
                 {data: 'total games', title: 'games played'},
                 {data: 'favorite type', title: 'favorite type'},
                 {data: 'favorite level', title: 'favorite level'},
-                {data: 'total points', title: 'total points'},
-                {data: 'accuracy', title: 'answer accuracy'}
+                {data: 'accuracy', title: 'avg accuracy'}
             ],
             scrollX: true,  // Enable horizontal scrolling
             pagingType: 'simple',
@@ -128,16 +131,17 @@ function init() {
                 {data: 'game_level', title: 'game level'},
                 {data: 'correct_answers', title: 'correct'},
                 {data: 'incorrect_answers', title: 'incorrect'},
-                {data: 'avg_time', title: 'avg time'},
+                {data: 'accuracy', title: 'accuracy'},
+                {data: 'avg_time', title: 'avg ans time'},
                 {data: 'fastest_answer', title: 'fastest answer'},
                 {data: 'date_time', title: 'date time'}
             ],
-            order: [[8, 'desc']],
+            order: [9, 'desc'],
             scrollX: true,  // Enable horizontal scrolling
             pagingType: 'simple',
             columnDefs: [
                 // Center align both header and body content for columns [...]
-                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] }
+                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ] }
             ]
         });
     }
@@ -162,19 +166,22 @@ function init() {
                 {data: 'game_level', title: 'game level'},
                 {data: 'correct_answers', title: 'correct'},
                 {data: 'incorrect_answers', title: 'incorrect'},
-                {data: 'avg_time', title: 'avg time'},
+                {data: 'accuracy', title: 'accuracy'},
+                {data: 'avg_time', title: 'avg ans time'},
                 {data: 'fastest_answer', title: 'fastest answer'},
                 {data: 'date_time', title: 'date time'}
             ],
-            order: [[8, 'desc']],
+            order: [9, 'desc'],
             scrollX: true,  // Enable horizontal scrolling
             pagingType: 'simple',
             columnDefs: [
                 // Center align both header and body content for columns [...]
-                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] }
+                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8,9 ] }
             ]
         });
     }
+
+
 
     //autofocus input name for login modal
     $('#login-modal').on('shown.bs.modal', function(){

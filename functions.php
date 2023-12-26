@@ -19,7 +19,6 @@ function connectDatabase(string $dsn, array $pdoOptions): PDO
     return $pdo;
 }
 
-
 /**
  * Function redirects with header() to supplied string url.
  * @param string $url
@@ -30,7 +29,6 @@ function redirection(string $url): void
     header("Location:$url");
     exit();
 }
-
 
 /**
  * Function registers new user
@@ -49,7 +47,6 @@ function userRegister(array $register_data): bool
 
     return $stmt->rowCount() > 0;
 }
-
 
 /**
  * Function checks user login and returns relevant data
@@ -82,13 +79,13 @@ function checkUserLogin(array $login_data): array|bool
     return $data ?? false;
 }
 
-
 /**
  * Function retrieves info for all registered users
  * @return array
  */
 function getUsers(): array
 {
+    //   CONCAT(ROUND(AVG(correct_answers / NULLIF(correct_answers + incorrect_answers, 0)) * 100, 2), '%') AS 'accuracy'
     $sql = "SELECT 
             u.id_user,
             u.role,
@@ -111,7 +108,12 @@ function getUsers(): array
                 LIMIT 1
             ) AS 'favorite level',
             SUM(points) AS 'total points',
-            CONCAT(ROUND(AVG(correct_answers / NULLIF(correct_answers + incorrect_answers, 0)) * 100, 2), '%') AS 'accuracy'
+            CONCAT(
+            CASE 
+                WHEN SUM(correct_answers + incorrect_answers) = 0 THEN '0%'
+                ELSE CONCAT(ROUND(AVG(correct_answers / NULLIF(correct_answers + incorrect_answers, 0)) * 100, 2), '%')
+            END
+            ) AS 'accuracy'
             FROM 
                 users u
             JOIN 
@@ -124,31 +126,42 @@ function getUsers(): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
 /**
  * Function returns highscore data
  * @param $type
  * @return array
  */
-function getHighscores(?string $arg = null): array
+function getHighscores(?string $type = null): array
 {
-    if ($arg === 'guest') {
-        $sql = "SELECT 
+    /* initial guest query
+     $sql = "SELECT
 				u.username,
-                h.points, 
-                h.correct_answers, 
-                h.incorrect_answers, 
-                h.avg_time, 
-                h.fastest_answer, 
-                h.game_type, 
-                h.game_level, 
-                h.date_time , 
+                h.points,
+                h.correct_answers,
+                h.incorrect_answers,
+                h.avg_time,
+                h.fastest_answer,
+                h.game_type,
+                h.game_level,
+                h.date_time ,
                 u.username
                 FROM highscores h
                 INNER JOIN users u ON h.id_user = u.id_user
                 ORDER BY points DESC
                 LIMIT 5";
-    } else {
+     */
+    if ($type === 'guest') {
+        $sql = "SELECT 
+				u.username,
+                h.points, 
+                h.game_type, 
+                h.game_level, 
+                h.date_time
+                FROM highscores h
+                INNER JOIN users u ON h.id_user = u.id_user
+                ORDER BY points DESC
+                LIMIT 5";
+    } elseif ($type === 'admin' || $type === 'user') {
         $sql = "SELECT 
                 u.username, 
                 h.points, 
@@ -158,10 +171,19 @@ function getHighscores(?string $arg = null): array
                 h.fastest_answer, 
                 h.game_type, 
                 h.game_level, 
-                h.date_time
+                h.date_time,
+                CONCAT(
+                CASE 
+                    WHEN SUM(correct_answers + incorrect_answers) = 0 THEN '0%'
+                    ELSE CONCAT(ROUND(AVG(correct_answers / NULLIF(correct_answers + incorrect_answers, 0)) * 100, 2), '%')
+                END
+                ) AS 'accuracy'
                 FROM highscores h
                 INNER JOIN users u ON h.id_user = u.id_user
-                ORDER BY h.points DESC, u.username";
+                GROUP BY 
+                u.username, h.points, h.correct_answers, h.incorrect_answers, h.avg_time, h.fastest_answer, h.game_type, h.game_level, h.date_time
+            ORDER BY 
+                h.points DESC, 'accuracy' DESC, u.username";
     }
 
     $stmt = $GLOBALS['pdo']->prepare($sql);
@@ -170,20 +192,12 @@ function getHighscores(?string $arg = null): array
 
 }
 
-
 /**
  * Function retrieves total number of games played by difficulty level
  * @return array
  */
 function getGameDiffLevelStats(): array
 {
-    /*
-   [
-   {"game_level":"easy","games_played":2},
-   {"game_level":"medium","games_played":5},
-   {"game_level":"hard","games_played":7}
-   ]
-    */
     $sql = "SELECT game_level, COUNT(*) AS games_played
             FROM highscores
             GROUP BY game_level
@@ -195,21 +209,12 @@ function getGameDiffLevelStats(): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
 /**
  * Function retrieves total number of games played by type
  * @return array
  */
 function getGameTypeStats(): array
 {
-    /*
-     [
-     {"game_type":"add","games_played":5},
-     {"game_type":"subtract","games_played":2},
-     {"game_type":"multiply","games_played":5},
-     {"game_type":"modulo","games_played":2}
-     ]
-    */
     $sql = "SELECT game_type, COUNT(*) AS games_played
             FROM highscores
             GROUP BY game_type
@@ -220,7 +225,6 @@ function getGameTypeStats(): array
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 /**
  * Function returns top players by summed games or points
@@ -251,6 +255,87 @@ function topPlayers(string $sort_by): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Function retrieves games played by type for supplied user id.
+ * @param int $id_user
+ * @return array
+ */
+function gameTypesPlayedByUser(int $id_user): array
+{
+    $sql = "SELECT game_type, COUNT(*) AS games_played
+                FROM highscores h
+                INNER JOIN users u ON h.id_user = u.id_user
+                WHERE u.id_user = :id_user
+                GROUP BY game_type
+                ORDER BY
+                  CASE game_type
+                    WHEN 'add' THEN 1
+                    WHEN 'subtract' THEN 2
+                    WHEN 'multiply' THEN 3
+                    WHEN 'modulo' THEN 4
+                    ELSE 5  
+                  END";
 
+    $stmt = $GLOBALS['pdo']->prepare($sql);
+    $stmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+    $stmt->execute();
 
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
+/**
+ * Function returns user game stats for supplied filter which include average accuracy
+ * @param string $id_user
+ * @param string $filter
+ * @return array
+ */
+function userGameStats(string $id_user, string $filter): array
+{
+    if($filter === 'game_type'){
+        $sql = "SELECT 
+                game_type,
+                COUNT(*) as 'games_played',
+                CONCAT(
+                    CASE 
+                        WHEN SUM(correct_answers + incorrect_answers) = 0 THEN '0%'
+                        ELSE CONCAT(ROUND(AVG(correct_answers / NULLIF(correct_answers + incorrect_answers, 0)) * 100, 2), '%')
+                    END
+                ) as 'ans_accuracy'
+                FROM highscores
+                WHERE id_user = :id_user
+                GROUP BY game_type
+                ORDER BY 
+                CASE game_type
+                    WHEN 'add' THEN 1
+                    WHEN 'subtract' THEN 2
+                    WHEN 'multiply' THEN 3
+                    WHEN 'modulo' THEN 4
+                    ELSE 5  -- Default case, handle other values
+                END";
+    } elseif ($filter === 'game_level') {
+        $sql = "SELECT 
+                game_level,
+                COUNT(*) as 'games_played',
+                CONCAT(
+                    CASE 
+                        WHEN SUM(correct_answers + incorrect_answers) = 0 THEN '0%'
+                        ELSE CONCAT(ROUND(AVG(correct_answers / NULLIF(correct_answers + incorrect_answers, 0)) * 100, 2), '%')
+                    END
+                ) as 'ans_accuracy'
+                FROM highscores
+                WHERE id_user = :id_user
+                GROUP BY game_level
+                ORDER BY 
+                    CASE game_level
+                        WHEN 'easy' THEN 1
+                        WHEN 'medium' THEN 2
+                        WHEN 'hard' THEN 3
+                        ELSE 4  -- Default case, handle other values
+                    END";
+    }
+
+    $stmt = $GLOBALS['pdo']->prepare($sql);
+    $stmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
