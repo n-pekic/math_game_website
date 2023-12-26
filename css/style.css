@@ -5,12 +5,13 @@ body {
     min-height: 100vh;
     background: rgb(255, 255, 255);
     background: linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(144, 228, 250, 1) 40%, rgba(35, 201, 245, 1) 80%, rgba(105, 229, 255, 1) 100%);
-    font-family: 'AR One Sans', 'Varela Round', sans-serif;
+    font-family: 'Jockey One','AR One Sans', 'Varela Round', sans-serif;
+    font-size: 1rem;
 }
 
 h2 {
     font-weight: bolder;
-    letter-spacing: -2px;
+    font-size: 3rem;
     margin-top: 15px;
 }
 
@@ -29,10 +30,27 @@ h2 {
     border: 1px solid black;
     background-color: #ffffff;
     color: #000;
-    font-weight: 700;
+    /*font-weight: 700;*/
+    font-size: 1.5rem;
     max-width: 200px;
     box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
 }
+
+#login-modal button[type="submit"] {
+    font-size: 1rem;
+}
+
+#login-modal button[type="reset"] {
+    font-size: 1rem;
+}
+
+#login-modal-label,
+#high-scores-modal-label,
+#info-modal-label,
+#info-modal-label-panel {
+    font-size: 1.5rem;
+}
+
 
 .button-modal:hover {
     background-color: #3f464c;
@@ -55,12 +73,29 @@ h2 {
 }
 
 .modal-title {
-    font-weight: bolder
+    font-weight: bolder;
+    text-align: center;
 }
 
 .modal-content {
     border-radius: 20px;
 }
+
+.modal-body {
+    font-weight: lighter;
+    font-size: 1rem;
+    font-family: 'AR One Sans', 'Varela Round', 'Jockey One', sans-serif;
+}
+
+.data-table {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+    border: 1px solid black;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+    font-family: 'AR One Sans', 'Varela Round', 'Jockey One', sans-serif;
+}
+
 
 .error {
     color: #f00;
@@ -71,14 +106,6 @@ small {
     display: block;
     min-height: 1.5rem;
     margin-left: 0.5rem;
-}
-
-.data-table {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 30px;
-    border: 1px solid black;
-    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
 }
 
 #alert-container {

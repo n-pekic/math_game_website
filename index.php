@@ -20,7 +20,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Jockey+One&family=Varela+Round&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
@@ -29,14 +29,14 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
     <link rel="stylesheet"  type="text/css" href="css/style.css">
     <script src="/js/scripts.js"></script>
-    <title>Speed Math Challenge v2</title>
+    <title>Speed Math Challenge V2</title>
 </head>
 <body>
 
 <section id="section-one" class="d-flex align-items-center justify-content-center">
     <div>
         <img src="img/speed_math_challenge_logo_crop.png" alt="speed_math_logo" width="150">
-        <h2> Speed Math Challenge v2</h2>
+        <h2>Speed Math Challenge V2</h2>
     </div>
 </section>
 
@@ -44,12 +44,12 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <div class="button-container">
         <!-- Button to trigger high-scores-modal -->
         <button id="button-high-scores" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#high-scores-modal">
-            High-scores
+            High-scores!
         </button>
 
         <!-- Button to trigger the info-modal -->
         <button id="button-info" type="button" class="button-modal btn my-2 w-100"  data-bs-toggle="modal" data-bs-target="#info-modal">
-            How to Play
+            How to Play?
         </button>
 
         <!-- Button to trigger login-modal -->
@@ -83,7 +83,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div id="info-modal-header" class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">How to Play</h5>
+                <h5 class="modal-title" id="info-modal-label">How to Play</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -98,7 +98,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div id="highscore-modal-header" class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Top 5 High scores</h5>
+                <h5 class="modal-title" id="high-scores-modal-label">Top 5 High scores</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -113,7 +113,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
 <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="login-modal-header" class="modal-header">
+            <div id="login-modal-header text-center" class="modal-header">
                 <h5 class="modal-title" id="login-modal-label">Log in</h5>
                 <button id="close-modal-login" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

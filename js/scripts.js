@@ -22,7 +22,7 @@ function init() {
     const resetLogin = document.getElementById('reset-login');
     const closeModalLogin = document.getElementById('close-modal-login')
 
-    if(resetLogin) {
+    if (resetLogin) {
         resetLogin.addEventListener('click', function (e) {
             resetFields(formLogin);
         })
@@ -31,23 +31,23 @@ function init() {
         })
     }
 
-    if(formLogin !== null) {
+    if (formLogin !== null) {
         formLogin.addEventListener('submit', function (e) {
             e.preventDefault()
-            if (validateFormLogin()) this.submit();
+            if (validateFormLogin()) formLogin.submit();
         })
     }
 
     // index page -- highscore table
     const highscoreTableGuest = document.getElementById('highscore-table-guest');
-    if(highscoreTableGuest) {
+    if (highscoreTableGuest) {
         $(highscoreTableGuest).DataTable({
             ajax: {
                 url: 'ajax/highscores.php',
                 type: 'POST',
                 dataSrc: "",
                 data: {
-                    user : 'guest'
+                    user: 'guest'
                 },
             },
             columns: [
@@ -59,6 +59,7 @@ function init() {
                 {data: 'fastest_answer', title: 'fastest_answer'},
                 {data: 'game_type', title: 'type'},
                 {data: 'game_level', title: 'level'},
+                {data: 'accuracy', title: 'accuracy'},
                 {data: 'date_time', title: 'date'}
             ],
             paging: false,       // Disable pagination
@@ -67,7 +68,11 @@ function init() {
             //order: [[1, 'desc']],
             ordering: false,
             scrollX: true,  // Enable horizontal scrolling
-            sScrollXInner: '100%'
+            sScrollXInner: '100%',
+            columnDefs: [
+                // Center align both header and body content of columns [...]
+                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ] }
+            ]
         });
     }
 
@@ -78,7 +83,7 @@ function init() {
 
     // admin tables -- user table
     let userTableAdmin = document.getElementById('user-table-admin');
-    if(userTableAdmin) {
+    if (userTableAdmin) {
         $(userTableAdmin).DataTable({
             ajax: {
                 url: 'ajax/users.php',
@@ -86,30 +91,37 @@ function init() {
                 dataSrc: '',
             },
             columns: [
-                {data: 'id_user', title: 'ID'},
-                {data: 'username', title: 'user name'},
-                {data: 'role', title: 'role'}
+                {data: 'id_user', title: 'id'},
+                {data: 'role', title: 'role'},
+                {data: 'username', title: 'username'},
+                {data: 'total games', title: 'games played'},
+                {data: 'favorite type', title: 'favorite type'},
+                {data: 'favorite level', title: 'favorite level'},
+                {data: 'total points', title: 'total points'},
+                {data: 'accuracy', title: 'answer accuracy'}
             ],
             scrollX: true,  // Enable horizontal scrolling
-            pagingType: 'simple'
+            pagingType: 'simple',
+            columnDefs: [
+                // Center align both header and body content of columns [...]
+                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7 ] }
+            ]
         });
     }
 
     // admin tables -- highscore table
     let highscoreTableAdmin = document.getElementById('highscore-table-admin');
-    if(highscoreTableAdmin){
+    if (highscoreTableAdmin) {
         $(highscoreTableAdmin).DataTable({
             ajax: {
                 url: 'ajax/highscores.php',
                 type: 'POST',
                 dataSrc: '',
                 data: {
-                    user : 'user'
+                    user: 'admin'
                 },
             },
             columns: [
-                //{data: 'id_highscore', title: 'ID'},
-                //{data: 'id_user', title: 'ID user'},
                 {data: 'username', title: 'username'},
                 {data: 'points', title: 'points'},
                 {data: 'game_type', title: 'game type'},
@@ -122,22 +134,28 @@ function init() {
             ],
             order: [[8, 'desc']],
             scrollX: true,  // Enable horizontal scrolling
-            pagingType: 'simple'
+            pagingType: 'simple',
+            columnDefs: [
+                // Center align both header and body content for columns [...]
+                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] }
+            ]
         });
     }
 
     // user tables - highscore table
     let highscoreTableUser = document.getElementById
     ('highscore-table-user');
-    if(highscoreTableUser){
+    if (highscoreTableUser) {
         $(highscoreTableUser).DataTable({
             ajax: {
                 url: 'ajax/highscores.php',
                 type: 'POST',
                 dataSrc: '',
+                data: {
+                    user: 'user'
+                },
             },
             columns: [
-                //{data: 'id_user', title: 'ID user'},
                 {data: 'username', title: 'username'},
                 {data: 'points', title: 'points'},
                 {data: 'game_type', title: 'game type'},
@@ -150,9 +168,28 @@ function init() {
             ],
             order: [[8, 'desc']],
             scrollX: true,  // Enable horizontal scrolling
-            pagingType: 'simple'
+            pagingType: 'simple',
+            columnDefs: [
+                // Center align both header and body content for columns [...]
+                { className: "dt-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ] }
+            ]
         });
     }
+
+    //autofocus input name for login modal
+    $('#login-modal').on('shown.bs.modal', function(){
+        $(this).find('#username').focus();
+    });
+
+    // confirm logout
+    document.getElementById('button-logout').addEventListener('click', function (e) {
+        const confirmLogout = confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+            window.location.href = 'logout.php';
+        } else {
+            e.preventDefault();
+        }
+    });
 
 }
 
@@ -162,10 +199,10 @@ let validateFormLogin = () => {
     const usernameLogin = document.getElementById('username');
     const passwordLogin = document.getElementById('password');
 
-    if(isEmpty(usernameLogin.value.trim())) {
+    if (isEmpty(usernameLogin.value.trim())) {
         showErrorMessage(usernameLogin, "Username cannot be empty.");
         isValid = false;
-    } else if(!isOnlyNumsLetters(usernameLogin.value.trim())) {
+    } else if (!isOnlyNumsLetters(usernameLogin.value.trim())) {
         showErrorMessage(usernameLogin, "Only A-Z, a-z, 0-9, -, and _ allowed.");
         isValid = false;
     } else if(usernameLogin.value.trim().length > 12){

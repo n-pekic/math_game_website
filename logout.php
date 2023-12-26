@@ -6,6 +6,6 @@ session_start();
 session_unset();
 session_destroy();
 
-redirection("index.php?m=3");
+redirection("index.php");
 
 exit();
