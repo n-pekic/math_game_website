@@ -10,7 +10,6 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
     $role = $_SESSION['role'];
     $username = $_SESSION['username'];
 }
-
 ?>
 
 <!doctype html>
@@ -164,7 +163,47 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>How to play the game goes here</p>
+                <p>
+                <h4>Izbor Operacija</h4>
+                Igrač na početku igre ima mogućnost da odabere vrstu matematičkih operacija s kojima će se suočiti tokom igre. Ove operacije uključuju osnovne aritmetičke funkcije kao što su sabiranje i množenje. Igrač na taj način može prilagoditi izazov prema svojim preferencama ili se fokusirati na poboljšanje određenih matematičkih veština.
+                </p>
+
+                <img src="img/instruction_screenshots/select_mode.jpg" alt="select game mode screenshot" class="mx-auto d-block" width="300">
+
+                <p>
+                <h4>Izbor Težine Pitanja</h4>
+                Tokom postavljanja parametara igre, igrač ima mogućnost da odredi koliko teška pitanje želi rešiti tokom partije. Ovaj izbor omogućava prilagodljivost igre prema nivou udobnosti i željenoj tžinu igre, što omogućava personalizovano iskustvo svakom igraču.
+                </p>
+
+                <img src="img/instruction_screenshots/select_level.jpg" alt="select game difficulty level screenshot" class="mx-auto d-block" width="300">
+
+                <p>
+                <h4>Brzo Rešavanje</h4>
+                Osnovni cilj igre je brzo i precizno rešavanje matematičkih zadataka. Igrač je izložen nizu pitanja koja zahtevaju brz odgovor, stvarajući dinamično iskustvo u kojem se brzina igrača meri kroz efikasnost u rešavanju problema. Ova komponenta dodatno naglašava aspekt vremenskog pritiska tokom igre.
+                </p>
+
+                <img src="img/instruction_screenshots/game_1.jpg" alt="game play screenshot, difficulty medium" class="mx-auto d-block" width="300">
+
+                <p>
+                <h4>Odbrojavanje Vremena</h4>
+                Dodavanjem elementa vremena u igru, igrač se suočava s izazovom da reši svako pitanje unutar određenog vremenskog okvira. Ovo čini igru dinamičnom i podstiče igrača da održi visok tempo rešavanja kako bi postigao što bolji rezultat. Vreme može biti faktor koji dodatno testira sposobnosti igrača.
+                </p>
+
+                <img src="img/instruction_screenshots/game_2.jpg" alt="game play screenshot, time ran out, difficulty hard" class="mx-auto d-block" width="300">
+
+                <p>
+                <h4>Bodovanje</h4>
+                Igrač osvaja bodove na osnovu dva ključna faktora: brzine i tačnosti u rešavanju postavljenih matematičkih izračuna. Svaki tačan odgovor donosi određeni broj bodova, a
+                postizanje što većeg broja bodova postaje glavni cilj igre. Svai netačan odgovor oduzima određeni broj poena. Ova kombinacija brzine i tačnosti podstiče igrača da usavršava svoje matematičke veštine kako bi postigao što bolji rezultat.
+                </p>
+
+                <img src="img/instruction_screenshots/game_3.jpg" alt="game play screenshot difficulty level medium" class="mx-auto d-block" width="300">
+
+                <p>
+                    <h4>Pauziranje</h4>
+                Igrač ima mogućnost pauziranja igre. Tokom pauze na iskačućem prozru mu se prikazuje najbrži odgovor i prosečno vreme potrebno za odgovor na pitanje.
+                <img src="img/instruction_screenshots/pause.jpg" alt="paused game screenshot" class="mx-auto d-block" width="300">
+                </p>
             </div>
         </div>
     </div>
@@ -173,246 +212,6 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] !== true) {
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
-    }
-</script>
-
-<!-- Admin chart js-->
-<script>
-    const diffLevel = document.getElementById('num-diff-level');
-    if(diffLevel) {
-        $.ajax({
-            url: 'ajax/game_difficulty_stats.php',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                new Chart(diffLevel, {
-                    type: 'bar',
-                    data: {
-                        labels: data.map(entry => entry.game_level),
-                        datasets: [{
-                            label: 'Total games played',
-                            data: data.map(entry => entry.games_played),
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {}
-                });
-            },
-            error: function (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-    }
-
-    const gameType = document.getElementById('num-type');
-    if(gameType) {
-        $.ajax({
-            url: 'ajax/game_type_stats.php',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                new Chart(gameType, {
-                    type: 'bar',
-                    data: {
-                        labels: data.map(entry => entry.game_type),
-                        datasets: [{
-                            label: 'Total games played',
-                            data: data.map(entry => entry.games_played),
-                            borderWidth: 1,
-                            backgroundColor: [
-                                'rgb(149,227,149, 0.7)',
-                                'rgb(149,227,149, 0.7)',
-                                'rgb(149,227,149, 0.7)',
-                                'rgb(149,227,149, 0.7)'
-                                // 'rgb(54,162,235, 0.7)',
-                                // 'rgb(255,205,86, 0.7)',
-                                // 'rgb(255,99,132, 0.7)'
-                            ]
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                ticks: {
-                                    precision: 0
-                                }
-                            }
-                        }
-                    }
-                });
-            },
-            error: function (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-    }
-
-    const topPlayersGames = document.getElementById('top-players-games');
-    if(topPlayersGames) {
-        $.ajax({
-            url: 'ajax/top_player_stats.php',
-            method: 'GET',
-            dataType: 'json',
-            data: {
-                sort_by: 'total_games'
-            },
-            success: function (data) {
-                new Chart(topPlayersGames, {
-                    type: 'doughnut',
-                    data: {
-                        labels: data.map(entry => entry.username),
-                        datasets: [{
-                            label: 'Total games played',
-                            data: data.map(entry => entry.games_played),
-                            borderWidth: 1
-                            // backgroundColor: [
-                            //     'rgb(149,227,149, 0.7)',
-                            //     'rgb(54,162,235, 0.7)',
-                            //     'rgb(255,205,86, 0.7)',
-                            //     'rgb(255,99,132, 0.7)'
-                            // ]
-                        }]
-                    },
-                    options: {}
-                });
-            },
-            error: function (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-    }
-
-    const topPlayersPoints = document.getElementById('top-players-points');
-    if(topPlayersPoints) {
-        $.ajax({
-            url: 'ajax/top_player_stats.php',
-            method: 'GET',
-            dataType: 'json',
-            data: {
-                sort_by: 'total_points'
-            },
-            success: function (data) {
-                new Chart(topPlayersPoints, {
-                    type: 'doughnut',
-                    data: {
-                        labels: data.map(entry => entry.username),
-                        datasets: [{
-                            label: 'Total points won',
-                            data: data.map(entry => entry.points),
-                            borderWidth: 1,
-                            backgroundColor: [
-                                'rgba(95,190,95,0.7)',
-                                'rgba(238,179,54,0.7)'
-                            ]
-                        }]
-                    },
-                    options: {}
-                });
-            },
-            error: function (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-    }
-</script>
-
-<!-- User chart js-->
-<script>
-
-    const userStatsGameLevel = document.getElementById('user-stats-game-level');
-    if(userStatsGameLevel) {
-        $.ajax({
-            url: 'ajax/user_game_stats.php',
-            method: 'GET',
-            dataType: 'json',
-            data: {
-                filter: 'game_level',
-                id: '<?= $id_user ?>'
-            },
-            success: function (data) {
-                new Chart(userStatsGameLevel, {
-                    type: 'bar',
-                    data: {
-                        labels: data.map(entry => entry.game_level),
-                        datasets: [{
-                            label: 'Games played',
-                            data: data.map(entry => entry.games_played),
-                            borderWidth: 1,
-                            backgroundColor: 'rgba(73,217,251,0.6)'
-                        },
-                            {
-                                label: 'Accuracy (%)',
-                                //data: data.map(entry => entry.ans_accuracy),
-                                data: data.map(entry => parseFloat(entry.ans_accuracy)), // Convert to float
-                                borderWidth: 1,
-                                backgroundColor: 'rgba(137,238,174,0.6)'
-                            }
-                        ]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                ticks: {
-                                    precision: 0
-                                }
-                            }
-                        }
-                    }
-                });
-            },
-            error: function (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-    }
-
-
-    const userStatsGameType = document.getElementById('user-stats-game-type');
-    if(userStatsGameType) {
-        $.ajax({
-            url: 'ajax/user_game_stats.php',
-            method: 'GET',
-            dataType: 'json',
-            data: {
-                filter: 'game_type',
-                id: '<?= $id_user ?>'
-            },
-            success: function (data) {
-                console.log(data);
-                new Chart(userStatsGameType, {
-                    type: 'bar',
-                    data: {
-                        labels: data.map(entry => entry.game_type),
-                        datasets: [{
-                            label: 'Games played',
-                            data: data.map(entry => entry.games_played),
-                            borderWidth: 1,
-                            backgroundColor: 'rgba(73,217,251,0.6)'
-                        },
-                            {
-                                label: 'Accuracy (%)',
-                                //data: data.map(entry => entry.ans_accuracy),
-                                data: data.map(entry => parseFloat(entry.ans_accuracy)), // Convert to float
-                                borderWidth: 1,
-                                backgroundColor: 'rgba(137,238,174,0.6)'
-                            }
-                        ]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                ticks: {
-                                    precision: 0
-                                }
-                            }
-                        }
-                    }
-                });
-            },
-            error: function (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
     }
 </script>
 

@@ -83,50 +83,51 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div id="info-modal-header" class="modal-header text-center">
-                <h5 class="modal-title w-100" id="info-modal-label">How to Play</h5>
+                <h5 class="modal-title w-100" id="info-modal-label">How to Play?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p><b>Izbor Operacija</b>: Igrač bira vrstu matematičkih operacija, kao što su zbrajanje i oduzimanje.</p>
+                <p>
+                <h4>Izbor Operacija</h4>
+                Igrač na početku igre ima mogućnost da odabere vrstu matematičkih operacija s kojima će se suočiti tokom igre. Ove operacije uključuju osnovne aritmetičke funkcije kao što su sabiranje i množenje. Igrač na taj način može prilagoditi izazov prema svojim preferencama ili se fokusirati na poboljšanje određenih matematičkih veština.
+                </p>
 
-                <p><b>Izbor Broja Pitanja</b>: Igrač određuje broj pitanja koje želi rešiti tokom igre.</p>
+                <img src="img/instruction_screenshots/select_mode.jpg" alt="select game mode screenshot" class="mx-auto d-block" width="300">
 
-                <p><b>Brzo Rešavanje</b>: Cilj je brzo i tačno rešavati matematičke izračune kako bi se postigao što bolji rezultat.</p>
+                <p>
+                <h4>Izbor Težine Pitanja</h4>
+                Tokom postavljanja parametara igre, igrač ima mogućnost da odredi koliko teška pitanje želi rešiti tokom partije. Ovaj izbor omogućava prilagodljivost igre prema nivou udobnosti i željenoj tžinu igre, što omogućava personalizovano iskustvo svakom igraču.
+                </p>
 
-                <p><b>Odbrojavanje Vremena</b>: Igra može uključivati element vremena, gde igrač ima određeno vreme za rešavanje svakog pitanja.</p>
+                <img src="img/instruction_screenshots/select_level.jpg" alt="select game difficulty level screenshot" class="mx-auto d-block" width="300">
 
-                <p><b>Bodovanje</b>: Igrač osvaja bodove na osnovu brzine i tačnosti rešavanja pitanja.</p>
+                <p>
+                <h4>Brzo Rešavanje</h4>
+                Osnovni cilj igre je brzo i precizno rešavanje matematičkih zadataka. Igrač je izložen nizu pitanja koja zahtevaju brz odgovor, stvarajući dinamično iskustvo u kojem se brzina igrača meri kroz efikasnost u rešavanju problema. Ova komponenta dodatno naglašava aspekt vremenskog pritiska tokom igre.
+                </p>
 
-                <p><b>Izbor Operacija</b>: Igrač bira vrstu matematičkih operacija, kao što su zbrajanje i oduzimanje.</p>
+                <img src="img/instruction_screenshots/game_1.jpg" alt="game play screenshot, difficulty medium" class="mx-auto d-block" width="300">
 
-                <p><b>Izbor Broja Pitanja</b>: Igrač određuje broj pitanja koje želi rešiti tokom igre.</p>
+                <p>
+                <h4>Odbrojavanje Vremena</h4>
+                Dodavanjem elementa vremena u igru, igrač se suočava s izazovom da reši svako pitanje unutar određenog vremenskog okvira. Ovo čini igru dinamičnom i podstiče igrača da održi visok tempo rešavanja kako bi postigao što bolji rezultat. Vreme može biti faktor koji dodatno testira sposobnosti igrača.
+                </p>
 
-                <p><b>Brzo Rešavanje</b>: Cilj je brzo i tačno rešavati matematičke izračune kako bi se postigao što bolji rezultat.</p>
+                <img src="img/instruction_screenshots/game_2.jpg" alt="game play screenshot, time ran out, difficulty hard" class="mx-auto d-block" width="300">
 
-                <p><b>Odbrojavanje Vremena</b>: Igra može uključivati element vremena, gde igrač ima određeno vreme za rešavanje svakog pitanja.</p>
+                <p>
+                <h4>Bodovanje</h4>
+                Igrač osvaja bodove na osnovu dva ključna faktora: brzine i tačnosti u rešavanju postavljenih matematičkih izračuna. Svaki tačan odgovor donosi određeni broj bodova, a
+                postizanje što većeg broja bodova postaje glavni cilj igre. Svai netačan odgovor oduzima određeni broj poena. Ova kombinacija brzine i tačnosti podstiče igrača da usavršava svoje matematičke veštine kako bi postigao što bolji rezultat.
+                </p>
 
-                <p><b>Bodovanje</b>: Igrač osvaja bodove na osnovu brzine i tačnosti rešavanja pitanja.</p>
+                <img src="img/instruction_screenshots/game_3.jpg" alt="game play screenshot difficulty level medium" class="mx-auto d-block" width="300">
 
-                <p><b>Izbor Operacija</b>: Igrač bira vrstu matematičkih operacija, kao što su zbrajanje i oduzimanje.</p>
-
-                <p><b>Izbor Broja Pitanja</b>: Igrač određuje broj pitanja koje želi rešiti tokom igre.</p>
-
-                <p><b>Brzo Rešavanje</b>: Cilj je brzo i tačno rešavati matematičke izračune kako bi se postigao što bolji rezultat.</p>
-
-                <p><b>Odbrojavanje Vremena</b>: Igra može uključivati element vremena, gde igrač ima određeno vreme za rešavanje svakog pitanja.</p>
-
-                <p><b>Bodovanje</b>: Igrač osvaja bodove na osnovu brzine i tačnosti rešavanja pitanja.</p>
-
-                <p><b>Izbor Operacija</b>: Igrač bira vrstu matematičkih operacija, kao što su zbrajanje i oduzimanje.</p>
-
-                <p><b>Izbor Broja Pitanja</b>: Igrač određuje broj pitanja koje želi rešiti tokom igre.</p>
-
-                <p><b>Brzo Rešavanje</b>: Cilj je brzo i tačno rešavati matematičke izračune kako bi se postigao što bolji rezultat.</p>
-
-                <p><b>Odbrojavanje Vremena</b>: Igra može uključivati element vremena, gde igrač ima određeno vreme za rešavanje svakog pitanja.</p>
-
-                <p><b>Bodovanje</b>: Igrač osvaja bodove na osnovu brzine i tačnosti rešavanja pitanja.</p>
-
+                <p>
+                <h4>Pauziranje</h4>
+                Igrač ima mogućnost pauziranja igre. Tokom pauze na iskačućem prozru mu se prikazuje najbrži odgovor i prosečno vreme potrebno za odgovor na pitanje.
+                <img src="img/instruction_screenshots/pause.jpg" alt="paused game screenshot" class="mx-auto d-block" width="300">
+                </p>
             </div>
         </div>
     </div>
@@ -141,7 +142,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-<!--                    <h3 style="text-align: center">TOP 5 High-scores</h3>-->
                     <table id="highscore-table-guest" class="table table-hover display" style="width:100%">
                         <caption style="caption-side: bottom; text-align: center">Log in for detailed view.</caption>
                     </table>
@@ -171,8 +171,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
                         <small></small>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <input type="hidden" name="action" value="login">
-                        <input type="hidden" name="source" value="web">
                         <button type="submit" name="sb-login" value="sb" class="button-modal btn mx-2">Submit</button>
                         <button type="reset" id="reset-login" class="button-modal btn mx-2">Reset</button>
                     </div>

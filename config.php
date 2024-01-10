@@ -2,9 +2,6 @@
 
 const PARAMS = [
     "HOST" => 'localhost',
-//    "USER" => 'root',
-//    "PASSWORD" => '',
-//    "DB" => 'agilni',
     "USER" => 'first',
     "PASSWORD" => 'ZADcO14NsZMPzeU',
     "DB" => 'first',

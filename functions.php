@@ -339,3 +339,17 @@ function userGameStats(string $id_user, string $filter): array
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/*
+--- USER PANEL
+-- ova dva mozda pored imena u panelu
+-- total games played
+SELECT COUNT(*) AS 'Games played'
+FROM highscores
+WHERE id_user = 12;
+
+-- total points
+SELECT sum(points) as 'Total Points'
+FROM highscores
+WHERE id_user = 12;
+ */
