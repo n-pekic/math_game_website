@@ -87,46 +87,46 @@ if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
                 <h4>Izbor Operacija</h4>
-                Igrač na početku igre ima mogućnost da odabere vrstu matematičkih operacija s kojima će se suočiti tokom igre. Ove operacije uključuju osnovne aritmetičke funkcije kao što su sabiranje i množenje. Igrač na taj način može prilagoditi izazov prema svojim preferencama ili se fokusirati na poboljšanje određenih matematičkih veština.
+                <p>
+                    Igrač na početku igre ima mogućnost da odabere vrstu matematičkih operacija s kojima će se suočiti tokom igre. Ove operacije uključuju osnovne aritmetičke funkcije kao što su sabiranje i množenje. Igrač na taj način može prilagoditi izazov prema svojim preferencama ili se fokusirati na poboljšanje određenih matematičkih veština.
                 </p>
 
                 <img src="img/instruction_screenshots/select_mode.jpg" alt="select game mode screenshot" class="mx-auto d-block" width="300">
 
-                <p>
                 <h4>Izbor Težine Pitanja</h4>
-                Tokom postavljanja parametara igre, igrač ima mogućnost da odredi koliko teška pitanje želi rešiti tokom partije. Ovaj izbor omogućava prilagodljivost igre prema nivou udobnosti i željenoj tžinu igre, što omogućava personalizovano iskustvo svakom igraču.
+                <p>
+                    Tokom postavljanja parametara igre, igrač ima mogućnost da odredi koliko teška pitanje želi rešiti tokom partije. Ovaj izbor omogućava prilagodljivost igre prema nivou udobnosti i željenoj tžinu igre, što omogućava personalizovano iskustvo svakom igraču.
                 </p>
 
                 <img src="img/instruction_screenshots/select_level.jpg" alt="select game difficulty level screenshot" class="mx-auto d-block" width="300">
 
-                <p>
                 <h4>Brzo Rešavanje</h4>
-                Osnovni cilj igre je brzo i precizno rešavanje matematičkih zadataka. Igrač je izložen nizu pitanja koja zahtevaju brz odgovor, stvarajući dinamično iskustvo u kojem se brzina igrača meri kroz efikasnost u rešavanju problema. Ova komponenta dodatno naglašava aspekt vremenskog pritiska tokom igre.
+                <p>
+                    Osnovni cilj igre je brzo i precizno rešavanje matematičkih zadataka. Igrač je izložen nizu pitanja koja zahtevaju brz odgovor, stvarajući dinamično iskustvo u kojem se brzina igrača meri kroz efikasnost u rešavanju problema. Ova komponenta dodatno naglašava aspekt vremenskog pritiska tokom igre.
                 </p>
 
                 <img src="img/instruction_screenshots/game_1.jpg" alt="game play screenshot, difficulty medium" class="mx-auto d-block" width="300">
 
-                <p>
                 <h4>Odbrojavanje Vremena</h4>
-                Dodavanjem elementa vremena u igru, igrač se suočava s izazovom da reši svako pitanje unutar određenog vremenskog okvira. Ovo čini igru dinamičnom i podstiče igrača da održi visok tempo rešavanja kako bi postigao što bolji rezultat. Vreme može biti faktor koji dodatno testira sposobnosti igrača.
+                <p>
+                    Dodavanjem elementa vremena u igru, igrač se suočava s izazovom da reši svako pitanje unutar određenog vremenskog okvira. Ovo čini igru dinamičnom i podstiče igrača da održi visok tempo rešavanja kako bi postigao što bolji rezultat. Vreme može biti faktor koji dodatno testira sposobnosti igrača.
                 </p>
 
                 <img src="img/instruction_screenshots/game_2.jpg" alt="game play screenshot, time ran out, difficulty hard" class="mx-auto d-block" width="300">
 
-                <p>
                 <h4>Bodovanje</h4>
-                Igrač osvaja bodove na osnovu dva ključna faktora: brzine i tačnosti u rešavanju postavljenih matematičkih izračuna. Svaki tačan odgovor donosi određeni broj bodova, a
-                postizanje što većeg broja bodova postaje glavni cilj igre. Svai netačan odgovor oduzima određeni broj poena. Ova kombinacija brzine i tačnosti podstiče igrača da usavršava svoje matematičke veštine kako bi postigao što bolji rezultat.
+                <p>
+                    Igrač osvaja bodove na osnovu dva ključna faktora: brzine i tačnosti u rešavanju postavljenih matematičkih izračuna. Svaki tačan odgovor donosi određeni broj bodova, a
+                    postizanje što većeg broja bodova postaje glavni cilj igre. Svai netačan odgovor oduzima određeni broj poena. Ova kombinacija brzine i tačnosti podstiče igrača da usavršava svoje matematičke veštine kako bi postigao što bolji rezultat.
                 </p>
 
                 <img src="img/instruction_screenshots/game_3.jpg" alt="game play screenshot difficulty level medium" class="mx-auto d-block" width="300">
 
-                <p>
                 <h4>Pauziranje</h4>
-                Igrač ima mogućnost pauziranja igre. Tokom pauze na iskačućem prozru mu se prikazuje najbrži odgovor i prosečno vreme potrebno za odgovor na pitanje.
-                <img src="img/instruction_screenshots/pause.jpg" alt="paused game screenshot" class="mx-auto d-block" width="300">
+                <p>
+                    Igrač ima mogućnost pauziranja igre. Tokom pauze na iskačućem prozru mu se prikazuje najbrži odgovor i prosečno vreme potrebno za odgovor na pitanje.
+                    <img src="img/instruction_screenshots/pause.jpg" alt="paused game screenshot" class="mx-auto d-block" width="300">
                 </p>
             </div>
         </div>
