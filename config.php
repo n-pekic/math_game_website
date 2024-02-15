@@ -2,9 +2,9 @@
 
 const PARAMS = [
     "HOST" => 'localhost',
-    "USER" => 'first',
-    "PASSWORD" => 'ZADcO14NsZMPzeU',
-    "DB" => 'first',
+    "USER" => '',
+    "PASSWORD" => '',
+    "DB" => '',
     "CHARSET" => 'utf8mb4'
 ];
 
